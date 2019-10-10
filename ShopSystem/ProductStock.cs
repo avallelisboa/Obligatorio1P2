@@ -36,9 +36,9 @@ namespace ShopSystem
             return productsAdded;
         }
 
-        public void deleteProduct(int quantity)
+        public void deleteProduct(int id)
         {
-            products.RemoveRange(0, quantity);
+            products.RemoveAt(id);
         }
     }
 }

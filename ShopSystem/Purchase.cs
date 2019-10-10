@@ -7,6 +7,7 @@ namespace ShopSystem
     class Purchase
     {
         private Client client;
+        private List<ProductStock> productStocks = new List<ProductStock>();
         private List<Product> productsToBuy = new List<Product>();
         private int totalPrice = 0;
         private Purchase(Client client){ this.client = client;}
@@ -23,33 +24,19 @@ namespace ShopSystem
 
         public string buy()
         {
-            
+            int productsToBuyNumber = productsToBuy.Count;
+            for(int i =0 ; i< productsToBuyNumber; i++)
+            {
+                int id = productsToBuyNumber[i].id;
+
+            }
         }
 
-        public string addToPurchase(ProductStock productStock, Product product, int quantity)
+        public void addToPurchase(int stockId, int productId)
         {
-            bool wasFounded = false;
-            List<Product> products = productStock.ProductsList;
-            int productsNumber = productStock.ProductsQuantity;
-            int productsAdded = 0;
-            if(quantity <= productsNumber)
-            {
-                for(int i=0;i<productsNumber;i++)
-                {
-                    if(products[i] == product)
-                    {
-                        productsToBuy.Add(products[i]);
-                        productsAdded++;
-                        totalPrice += products[i].price;
-                    }
-                    if(productsAdded == quantity) break;
-                }
-                return "The products were added successfully";
-            }
-            else
-            {
-                return "The are not enough products in stock to add";
-            }           
+           Product _product = productStocks[stockId].products[productId];
+           productsToBuy.Add(_product);
+           totalPrice += _product.Price;
         }
     }
 }

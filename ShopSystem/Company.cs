@@ -10,16 +10,15 @@ namespace ShopSystem
         private string bussinesName;
         private int rut;
 
-        private Company(string companyName, string bussinesName, int rut, int number, string address, string mail, string user, string password, bool isFromMontevideo) : base(number,address,mail,user,password,isFromMontevideo)
+        private Company(int id,string companyName, string bussinesName, int rut, string address, string mail, string user, string password, bool isFromMontevideo) : base(id,address,mail,user,password,isFromMontevideo)
         {
             this.companyName = companyName;
             this.bussinesName = bussinesName;
             this.rut = rut;
         }
 
-        public static Company AddCompanyClient(string companyName, string bussinesName, int rut, string address, string mail, string user, string password, bool isFromMontevideo)
+        public static Company AddCompanyClient(int id, string companyName, string bussinesName, int rut, string address, string mail, string user, string password, bool isFromMontevideo)
         {
-            int number = 6464654;
             return new Company(companyName,bussinesName, rut, number, address, mail, user, password, isFromMontevideo);
         }
     }

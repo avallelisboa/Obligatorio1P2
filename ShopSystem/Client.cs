@@ -6,7 +6,7 @@ namespace ShopSystem
 {
     public class Client
     {
-        private int number;
+        private int id;
         private string phone;
         private string address;
         private string mail;
@@ -15,7 +15,7 @@ namespace ShopSystem
         private string password;
         private bool isFromMontevideo;
 
-        public int Number { get { return number; } }
+        public int Id { get { return id; } }
         public string Phone { get { return phone; } }
         public string Address { get { return address; } }
         public string Mail { get { return mail; } }
@@ -24,9 +24,9 @@ namespace ShopSystem
         public string Password { get { return password; } }
         public bool IsFromMontevideo { get { return isFromMontevideo; } }
 
-        internal Client(int number, string address, string mail, string user, string password, bool isFromMontevideo)
+        internal Client(int id, string address, string mail, string user, string password, bool isFromMontevideo)
         {
-            this.number = number;
+            this.id = id;
             this.address = address;
             this.mail = mail;
             this.user = user;

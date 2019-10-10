@@ -105,3 +105,5 @@ C:\Users\avall\Documents\Andrés\ORT\Programación 2\Obligatorio 1\ConsoleApp\bi
 C:\Users\avall\Documents\Andrés\ORT\Programación 2\Obligatorio 1\ConsoleApp\obj\Debug\ConsoleApp.csproj.CopyComplete
 C:\Users\avall\Documents\Andrés\ORT\Programación 2\Obligatorio 1\ConsoleApp\obj\Debug\ConsoleApp.exe
 C:\Users\avall\Documents\Andrés\ORT\Programación 2\Obligatorio 1\ConsoleApp\obj\Debug\ConsoleApp.pdb
+C:\Users\avall\Documents\Andrés\ORT\Programación 2\avallelisboa\Obligatorio1P2-2.0\ConsoleApp\obj\Debug\ConsoleApp.exe
+C:\Users\avall\Documents\Andrés\ORT\Programación 2\avallelisboa\Obligatorio1P2-2.0\ConsoleApp\obj\Debug\ConsoleApp.pdb

@@ -8,16 +8,15 @@ namespace ShopSystem
     {
         private string name;
         private string address;
-        private Common(int number, string name, string celular, string address, string mail, string user, string password, bool isFromMontevideo) : base(number, address,mail,user, password, isFromMontevideo)
+        private Common(int id, string name, string celular, string address, string mail, string user, string password, bool isFromMontevideo) : base(id, address,mail,user, password, isFromMontevideo)
         {
             this.name = name;
             this.address = address;
         }
 
-        public static Common AddCommonClient(string name, string celular, string address, string mail, string user, string password, bool isFromMontevideo)
+        public static Common AddCommonClient(int id, string name, string celular, string address, string mail, string user, string password, bool isFromMontevideo)
         {
-            int number = 6464654;
-            return new Common(number, name, celular, address, mail, user, password, isFromMontevideo);
+            return new Common(id, number, name, celular, address, mail, user, password, isFromMontevideo);
         }
     }
 }

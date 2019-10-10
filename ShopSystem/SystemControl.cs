@@ -16,26 +16,16 @@ namespace ShopSystem
         public int NumberOfClients { get { return clients.Count; } }
         public List<ProductStock> Catalogue { get { return catalogue; } }
 
-        public bool controlAddCommonClient(string name, string celular, string mail, string address,string user, string password, bool isFromMontevideo)
+        public void controlAddCommonClient(string name, string celular, string mail, string address,string user, string password, bool isFromMontevideo)
         {
-            Common client = Common.AddCommonClient(name, celular, address, mail, user, password, isFromMontevideo);
-            if (client != null)
-            {
-                clients.Add(client);
-                return true;
-            }
-            else return false;
+            int id = clients.Count;
+            clients.Add(Common.AddCommonClient(id ,name, celular, address, mail, user, password, isFromMontevideo));
         }
 
-        public bool controlAddCompanyClient(string companyName, string bussinesName, int rut, string mail, string address, string user, string password, bool isFromMontevideo)
+        public void controlAddCompanyClient(string companyName, string bussinesName, int rut, string mail, string address, string user, string password, bool isFromMontevideo)
         {
-            Company client = Company.AddCompanyClient(companyName, bussinesName, rut, address, mail, user, password, isFromMontevideo);
-            if (client != null)
-            {
-                clients.Add(client);
-                return true;
-            }
-            else return false;
+            int id = clients.Count;
+            clients.Add(Company.AddCompanyClient(id,companyName, bussinesName, rut, address, mail, user, password, isFromMontevideo));               
         }
 
         public void preLoad()
