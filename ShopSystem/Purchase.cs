@@ -27,10 +27,11 @@ namespace ShopSystem
             int productsToBuyNumber = productsToBuy.Count;
             for(int i =0 ; i< productsToBuyNumber; i++)
             {
-                int id = productsToBuy[i].Id;
-
+                int productId = productsToBuy[i].Id;
+                int stockId = productsToBuy[i].Id;
+                productStocks[stockId].ProductsList.RemoveAt(productId);
             }
-            throw new NotImplementedException();
+            return "Debe pagar $" + totalPrice;
         }
 
         public void addToPurchase(int stockId, int productId)

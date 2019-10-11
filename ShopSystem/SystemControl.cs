@@ -65,17 +65,25 @@ namespace ShopSystem
             else return false;
         }
 
-        public void AddToPurchase(int number)
+        public void getPurchase(Client client)
         {
-            throw new NotImplementedException();
+            if (findClient(client.Id))
+            {
+                Purchase _purchase = Purchase.getPurchase(client);
+            }           
+
         }
 
-        public void addProductStock(string name, string description, string category)
+        public void addProductStock(string name, string description)
         {
             int id = catalogue.Count;
-            catalogue.Add(new ProductStock(name,id,description,category));
+            catalogue.Add(new ProductStock(name,id,description));
         }
 
-
+        public void addProduct(ProductStock productStock, string name, int price, string description, bool isExclusive)
+        {
+            int productStockId = productStock.StockId;
+            productStock.addProduct(price, description, isExclusive);
+        }
     }
 }

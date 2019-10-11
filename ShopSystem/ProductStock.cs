@@ -11,7 +11,6 @@ namespace ShopSystem
         private int productsQuantity = 0;
         private string name;
         private int price;
-        private string description;
         private string category;
 
         public int StockId { get { return stockId; } }
@@ -20,11 +19,11 @@ namespace ShopSystem
         public List<Product> ProductsList { get { return products; } }
         public string  Category { get { return category;} set { if (value == "Frescos" || value == "Congelados" || value == "Hogar" || value == "Téxtiles" || value == "Tecnología") category = value; } }
         public int ProductsQuantity { get { return productsQuantity; } }
-        public string Description { get { return description; } set { description = value; } }
 
-        public void addProducts(int ammount)
+        public void addProduct(int price, string description, bool isExclusive)
         {
-            productsQuantity += ammount;
+            int id = products.Count;
+            products.Add(Product.createProduct(id, stockId, name, price, description, isExclusive));
         }
 
         public List<Product> addToPurchase(int quantity)
@@ -37,17 +36,21 @@ namespace ShopSystem
             return productsAdded;
         }
 
-        public ProductStock(string name, int stockId, string description, string category)
+        public ProductStock(string name, int stockId, string category)
         {
             this.name = name;
             this.stockId = stockId;
-            this.description = description;
             this.category = category;
         }
 
         public void deleteProduct(int id)
         {
             products.RemoveAt(id);
+            int productsNumber = ProductsList.Count;
+            for(int i =0; i< productsNumber; i++)
+            {
+                ProductsList[i].Id = i;
+            }
         }
     }
 }
