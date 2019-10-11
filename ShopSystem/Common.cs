@@ -16,7 +16,7 @@ namespace ShopSystem
 
         public static Common AddCommonClient(int id, string name, string celular, string address, string mail, string user, string password, bool isFromMontevideo)
         {
-            return new Common(id, number, name, celular, address, mail, user, password, isFromMontevideo);
+            return new Common(id, name, celular, address, mail, user, password, isFromMontevideo);
         }
     }
 }

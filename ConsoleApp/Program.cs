@@ -9,6 +9,8 @@ namespace ConsoleApp
         private static bool exit = false;
         static void Main(string[] args)
         {
+            SystemControl _system = SystemControl.getSystemControl();
+           // _system.preLoad();
             while (!exit)
             {
                 Console.Clear();
@@ -110,8 +112,8 @@ namespace ConsoleApp
                     Console.Clear();
                     Console.WriteLine("Los datos no son correcto");
                     Console.WriteLine("Presione la tecla \'v\' para volver al menú principal o cualquier otra tecla para volver a intentarlo");
-                    ConsoleKey key = Console.ReadKey(true).Key;
-                    if (key == ConsoleKey.V)
+                    ConsoleKey _key = Console.ReadKey(true).Key;
+                    if (_key == ConsoleKey.V)
                     {
                         registerSuccessful = true;
                     }

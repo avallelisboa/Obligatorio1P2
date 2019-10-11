@@ -19,7 +19,7 @@ namespace ShopSystem
 
         public static Company AddCompanyClient(int id, string companyName, string bussinesName, int rut, string address, string mail, string user, string password, bool isFromMontevideo)
         {
-            return new Company(companyName,bussinesName, rut, number, address, mail, user, password, isFromMontevideo);
+            return new Company(id,companyName,bussinesName, rut, address, mail, user, password, isFromMontevideo);
         }
     }
 }

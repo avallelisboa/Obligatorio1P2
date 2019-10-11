@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShopSystem
 {
-    class Product
+    public class Product
     {
         private int id;
         private int stockId;
@@ -13,7 +13,7 @@ namespace ShopSystem
         private bool isExclusive;
 
         public int Id{get{return id;}}
-        public int stockId{get{return stockId;}}
+        public int StockId{get{return stockId;}}
         public string Name{get{return name;}}
         public int Price{get{return price;}}
         private bool IsExclusive{get{return isExclusive;}}
@@ -27,9 +27,9 @@ namespace ShopSystem
             this.isExclusive = isExclusive;
         }
 
-        public Product createProduct(int id,string name, int price, bool isExclusive)
+        public Product createProduct(int id, int stockId,string name, int price, bool isExclusive)
         {
-            Product product = new Product(id, name,price, isExclusive);
+            Product product = new Product(id,stockId, name, price, isExclusive);
             return product;
         }
     }

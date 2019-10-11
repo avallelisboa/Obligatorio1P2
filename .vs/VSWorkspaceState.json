@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ConsoleApp"
+    "\\ConsoleApp",
+    "\\ShopSystem"
   ],
-  "SelectedNode": "\\ConsoleApp\\bin",
+  "SelectedNode": "\\ConsoleApp\\ConsoleApp.sln",
   "PreviewInSolutionExplorer": false
 }

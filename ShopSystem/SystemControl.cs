@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShopSystem
 {
-    class SystemControl
+    public class SystemControl
     {
         private SystemControl() { }        
         private static SystemControl _systemControl = new SystemControl();
@@ -14,7 +14,7 @@ namespace ShopSystem
         private List<Purchase> purchases = new List<Purchase>();
 
         public int NumberOfClients { get { return clients.Count; } }
-        public List<ProductStock> Catalogue { get { return catalogue; } }
+        public List<ProductStock> getCatalogue() { return catalogue; }
 
         public void controlAddCommonClient(string name, string celular, string mail, string address,string user, string password, bool isFromMontevideo)
         {
@@ -33,12 +33,12 @@ namespace ShopSystem
             throw new NotImplementedException();
         }
 
-        public bool findClient(int number)
+        public bool findClient(int id)
         {
             bool wasFounded = false;
             foreach(Client client in clients)
             {
-                if (client.Number == number)
+                if (client.Id == id)
                 {
                     wasFounded = true;
                     break;
@@ -69,9 +69,13 @@ namespace ShopSystem
         {
             throw new NotImplementedException();
         }
-        public void addProductStock(string name, int price, string description, string category)
+
+        public void addProductStock(string name, string description, string category)
         {
-            throw new NotImplementedException();
+            int id = catalogue.Count;
+            catalogue.Add(new ProductStock(name,id,description,category));
         }
+
+
     }
 }

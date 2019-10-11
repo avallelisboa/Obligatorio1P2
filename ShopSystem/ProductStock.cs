@@ -4,22 +4,23 @@ using System.Text;
 
 namespace ShopSystem
 {
-    class ProductStock
+    public class ProductStock
     {
         private List<Product> products = new List<Product>();
-        private int id;
+        private int stockId;
         private int productsQuantity = 0;
         private string name;
         private int price;
         private string description;
         private string category;
 
+        public int StockId { get { return stockId; } }
         public string Name { get { return name; } }
         public int Price { get { return price; } set { price = value; } }
         public List<Product> ProductsList { get { return products; } }
         public string  Category { get { return category;} set { if (value == "Frescos" || value == "Congelados" || value == "Hogar" || value == "Téxtiles" || value == "Tecnología") category = value; } }
         public int ProductsQuantity { get { return productsQuantity; } }
-        public string Description { get {return description } set { description = value; } }
+        public string Description { get { return description; } set { description = value; } }
 
         public void addProducts(int ammount)
         {
@@ -34,6 +35,14 @@ namespace ShopSystem
                 productsAdded.Add(products[i]);
             }
             return productsAdded;
+        }
+
+        public ProductStock(string name, int stockId, string description, string category)
+        {
+            this.name = name;
+            this.stockId = stockId;
+            this.description = description;
+            this.category = category;
         }
 
         public void deleteProduct(int id)
