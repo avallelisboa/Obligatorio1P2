@@ -7,10 +7,11 @@ namespace ConsoleApp
     {
         private const string welcome = "";
         private static bool exit = false;
+        private static SystemControl _system;
         static void Main(string[] args)
         {
-            SystemControl _system = SystemControl.getSystemControl();
-           // _system.preLoad();
+            _system = SystemControl.getSystemControl();
+            //_system.preLoad();
             while (!exit)
             {
                 Console.Clear();
@@ -18,7 +19,8 @@ namespace ConsoleApp
                 Console.WriteLine("Presione el número de opción en su teclado númerico para realizar la operación correspondiente");
                 Console.WriteLine("------------------------------------------------------------------------------------------------");
                 Console.WriteLine("1 - Iniciar Sesión");
-                Console.WriteLine("2 - Registrarse");              
+                Console.WriteLine("2 - Registrarse");
+                Console.WriteLine("3 - Configuraciones");
                 Console.WriteLine("0 - Salir");
                 Console.WriteLine("-------------------------------------------------------------------------------------------------");
                 bool optionNotCorrect = true;
@@ -35,6 +37,10 @@ namespace ConsoleApp
                             outLoop();
                             register();
                             break;
+                        case ConsoleKey.NumPad3:
+                            outLoop();
+                            setUp();
+                            break;
                         case ConsoleKey.NumPad0:
                             outLoop();
                             exit = true;
@@ -50,75 +56,118 @@ namespace ConsoleApp
         }
         private static void login()
         {
-            bool loginSuccessful = false;
-            while (!loginSuccessful)
+            try
             {
-                Console.Clear();
-                Console.WriteLine("Ingrese su usuario");
-                string user = Console.ReadLine();
-                Console.WriteLine("Ingrese su contraseña");
-                string password = Console.ReadLine();
-                bool wasLoginSuccessful = false;
-                if (wasLoginSuccessful)
-                {
-
-                }
-                else
+                _system = SystemControl.getSystemControl();
+                bool loginSuccessful = false;
+                while (!loginSuccessful)
                 {
                     Console.Clear();
-                    Console.WriteLine("El usuario o la contraseña no fue correcto");
-                    Console.WriteLine("Presione la tecla \'v\' para volver al menú principal o cualquier otra tecla para volver a intentarlo");
-                    ConsoleKey key = Console.ReadKey(true).Key;
-                    if(key == ConsoleKey.V)
+                    Console.WriteLine("Ingrese su usuario");
+                    string user = Console.ReadLine();
+                    Console.WriteLine("Ingrese su contraseña");
+                    string password = Console.ReadLine();
+                    bool wasLoginSuccessful = _system.login(user, password);
+                    if (wasLoginSuccessful)
                     {
-                        loginSuccessful = true;
+                        Console.Clear();
+                        signIn();
                     }
-                }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("El usuario o la contraseña no fue correcto");
+                        Console.WriteLine("Presione la tecla \'v\' para volver al menú principal o cualquier otra tecla para volver a intentarlo");
+                        ConsoleKey key = Console.ReadKey(true).Key;
+                        if (key == ConsoleKey.V)
+                        {
+                            loginSuccessful = true;
+                        }
+                    }
 
+                }
             }
+            catch (Exception err)
+            {
+                errorHandling(err);
+            }
+            
         }
 
         private static void register()
         {
-            bool registerSuccessful = false;
-            while (!registerSuccessful)
+            try
             {
-                Console.Clear();
-                Console.WriteLine("Seleccione el tipo de cliente");
-                Console.WriteLine("1 - Cliente común");
-                Console.WriteLine("2 - Cliente empresa");
-                ConsoleKey key  = Console.ReadKey(true).Key;
-                if(key == ConsoleKey.NumPad1)
-                {
+                throw new NotImplementedException();
 
-                }
-                else if(key == ConsoleKey.NumPad2)
-                {
-
-                }
-                else
-                {
-
-                }
-                Console.WriteLine("Ingrese su contraseña");
-                string password = Console.ReadLine();
-                bool wasLoginSuccessful = false;
-                if (wasLoginSuccessful)
-                {
-
-                }
-                else
+                bool registerSuccessful = false;
+                while (!registerSuccessful)
                 {
                     Console.Clear();
-                    Console.WriteLine("Los datos no son correcto");
-                    Console.WriteLine("Presione la tecla \'v\' para volver al menú principal o cualquier otra tecla para volver a intentarlo");
-                    ConsoleKey _key = Console.ReadKey(true).Key;
-                    if (_key == ConsoleKey.V)
+                    Console.WriteLine("Seleccione el tipo de cliente");
+                    Console.WriteLine("1 - Cliente común");
+                    Console.WriteLine("2 - Cliente empresa");
+                    ConsoleKey key = Console.ReadKey(true).Key;
+                    if (key == ConsoleKey.NumPad1)
+                    {
+                        //TODO
+                    }
+                    else if (key == ConsoleKey.NumPad2)
+                    {
+                        //TODO
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    bool wasRegisterSuccessful = false;
+                    if (wasRegisterSuccessful)
                     {
                         registerSuccessful = true;
+                        Console.Clear();
+                        Console.WriteLine("El usuario fue registrado correctamente");
+                        Console.WriteLine("Presione una tecla para continuar");
+                        ConsoleKey _key = Console.ReadKey(true).Key;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Los datos no son correcto");
+                        Console.WriteLine("Presione la tecla \'v\' para volver al menú principal o cualquier otra tecla para volver a intentarlo");
+                        ConsoleKey _key = Console.ReadKey(true).Key;
+                        if (_key == ConsoleKey.V)
+                        {
+                            registerSuccessful = true;
+                        }
                     }
                 }
+            }
+            catch(Exception err)
+            {
+                errorHandling(err);
+            }            
+        }
+        private static void signIn()
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception err)
+            {
+                errorHandling(err);
+            }            
+        }
 
+        private static void setUp()
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception err)
+            {
+                errorHandling(err);
             }
         }
         

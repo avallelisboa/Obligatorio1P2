@@ -13,7 +13,7 @@ namespace ShopSystem
         private string description;
         private bool isExclusive;
 
-        public int Id{ get { return id; } set {id = value } }
+        public int Id{ get { return id; } set { id = value; } }
         public int StockId{get{return stockId;}}
         public string Name{get{return name;}}
         public int Price{get{return price;}}
