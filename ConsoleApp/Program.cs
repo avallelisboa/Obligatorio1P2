@@ -31,7 +31,7 @@ namespace ConsoleApp
                     {
                         case ConsoleKey.NumPad1:
                             outLoop();
-                            login();
+                            signIn();
                             break;
                         case ConsoleKey.NumPad2:
                             outLoop();
@@ -53,45 +53,6 @@ namespace ConsoleApp
                     optionNotCorrect = false;
                 }
             }
-        }
-        private static void login()
-        {
-            try
-            {
-                _system = SystemControl.getSystemControl();
-                bool loginSuccessful = false;
-                while (!loginSuccessful)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Ingrese su usuario");
-                    string user = Console.ReadLine();
-                    Console.WriteLine("Ingrese su contraseña");
-                    string password = Console.ReadLine();
-                    bool wasLoginSuccessful = _system.login(user, password);
-                    if (wasLoginSuccessful)
-                    {
-                        Console.Clear();
-                        signIn();
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        Console.WriteLine("El usuario o la contraseña no fue correcto");
-                        Console.WriteLine("Presione la tecla \'v\' para volver al menú principal o cualquier otra tecla para volver a intentarlo");
-                        ConsoleKey key = Console.ReadKey(true).Key;
-                        if (key == ConsoleKey.V)
-                        {
-                            loginSuccessful = true;
-                        }
-                    }
-
-                }
-            }
-            catch (Exception err)
-            {
-                errorHandling(err);
-            }
-            
         }
 
         private static void register()
@@ -190,7 +151,32 @@ namespace ConsoleApp
         {
             try
             {
-                throw new NotImplementedException();
+                bool wasLoginSuccessful = false;
+                while (!wasLoginSuccessful)
+                {
+                    Console.WriteLine("Ingrese su usuario");
+                    string user = Console.ReadLine();
+                    Console.WriteLine("Ingrese su contraseña");
+                    string password = Console.ReadLine();
+                    wasLoginSuccessful = _system.login(user, password);
+                    Console.Clear();
+                    if (wasLoginSuccessful)
+                    {
+                        Console.WriteLine("Los datos son correctos, la sesión ha sido iniciada \n Presione una tecla para continuar");
+                        Console.ReadKey();
+                        clientMenu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("El usuario o la contraseña no fueron correctos");
+                        Console.WriteLine("Presione una tecla para volver a intentarlo o presione \"v\" para volver al menú principal");
+                        ConsoleKey _key = Console.ReadKey(true).Key;
+                        if(_key == ConsoleKey.V)
+                        {
+                            wasLoginSuccessful = true;
+                        }
+                    }
+                }                
             }
             catch (Exception err)
             {
@@ -208,6 +194,11 @@ namespace ConsoleApp
             {
                 errorHandling(err);
             }
+        }
+
+        private static void clientMenu()
+        {
+            throw new NotImplementedException();
         }
         
         private static void errorHandling(Exception err)
