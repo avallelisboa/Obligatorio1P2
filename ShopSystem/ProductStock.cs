@@ -20,10 +20,10 @@ namespace ShopSystem
         public string  Category { get { return category;} set { if (value == "Frescos" || value == "Congelados" || value == "Hogar" || value == "Téxtiles" || value == "Tecnología") category = value; } }
         public int ProductsQuantity { get { return productsQuantity; } }
 
-        public void addProduct(int price, string description, bool isExclusive)
+        public void addProduct(int price, string description, string category, bool isExclusive)
         {
             int id = products.Count;
-            products.Add(Product.createProduct(id, stockId, name, price, description, isExclusive));
+            products.Add(Product.createProduct(id, stockId, name, price, description, category, isExclusive));
         }
 
         public List<Product> addToPurchase(int quantity)

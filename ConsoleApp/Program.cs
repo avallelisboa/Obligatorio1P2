@@ -98,8 +98,6 @@ namespace ConsoleApp
         {
             try
             {
-                throw new NotImplementedException();
-
                 bool registerSuccessful = false;
                 while (!registerSuccessful)
                 {
@@ -110,28 +108,69 @@ namespace ConsoleApp
                     ConsoleKey key = Console.ReadKey(true).Key;
                     if (key == ConsoleKey.NumPad1)
                     {
-                        //TODO
+                        Console.Clear();
+                        Console.WriteLine("Ingrese su nombre");
+                        string name = Console.ReadLine();
+                        Console.WriteLine("Ingrese su celular");
+                        string celular = Console.ReadLine();
+                        Console.WriteLine("Ingrese su dirección");
+                        string address = Console.ReadLine();
+                        Console.WriteLine("Ingrese su mail");
+                        string mail = Console.ReadLine();
+                        Console.WriteLine("Ingrese su usuario");
+                        string user = Console.ReadLine();
+                        Console.WriteLine("Ingrese su contraseña");
+                        string password = Console.ReadLine();
+                        Console.WriteLine("Ingrese su Departamento");
+                        string departamento = Console.ReadLine();
+                        bool isFromMontevideo = false;
+                        if (departamento == "Montevideo" || departamento == "montevideo" || departamento == "MONTEVIDEO")
+                        {
+                            isFromMontevideo = true;
+                        }
+                        registerSuccessful = _system.controlAddCommonClient(name, celular, mail, address, user, password, isFromMontevideo);
+                        Console.Clear();
                     }
+
                     else if (key == ConsoleKey.NumPad2)
                     {
-                        //TODO
+                        Console.Clear();
+                        Console.WriteLine("Ingrese el nombre de su empresa");
+                        string companyName = Console.ReadLine();
+                        Console.WriteLine("Ingrese su razón social");
+                        string bussinesName = Console.ReadLine();
+                        Console.WriteLine("Ingrese su rut");
+                        int rut = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Ingrese su dirección");
+                        string address = Console.ReadLine();
+                        Console.WriteLine("Ingrese su mail");
+                        string mail = Console.ReadLine();
+                        Console.WriteLine("Ingrese su usuario");
+                        string user = Console.ReadLine();
+                        Console.WriteLine("Ingrese su contraseña");
+                        string password = Console.ReadLine();
+                        Console.WriteLine("Ingrese su Departamento");
+                        string departamento = Console.ReadLine();
+                        bool isFromMontevideo = false;
+                        if (departamento == "Montevideo" || departamento == "montevideo" || departamento == "MONTEVIDEO")
+                        {
+                            isFromMontevideo = true;
+                        }
+                        registerSuccessful = _system.controlAddCompanyClient(companyName, bussinesName, rut, address, mail, user, password, isFromMontevideo);
+                        Console.Clear();
                     }
                     else
                     {
                         continue;
                     }
-                    bool wasRegisterSuccessful = false;
-                    if (wasRegisterSuccessful)
+                    if (registerSuccessful)
                     {
-                        registerSuccessful = true;
-                        Console.Clear();
                         Console.WriteLine("El usuario fue registrado correctamente");
                         Console.WriteLine("Presione una tecla para continuar");
                         ConsoleKey _key = Console.ReadKey(true).Key;
                     }
                     else
                     {
-                        Console.Clear();
                         Console.WriteLine("Los datos no son correcto");
                         Console.WriteLine("Presione la tecla \'v\' para volver al menú principal o cualquier otra tecla para volver a intentarlo");
                         ConsoleKey _key = Console.ReadKey(true).Key;

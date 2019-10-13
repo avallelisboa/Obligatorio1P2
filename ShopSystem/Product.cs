@@ -20,7 +20,7 @@ namespace ShopSystem
         public string Description { get { return description; } }
         private bool IsExclusive{get{return isExclusive;}}
 
-        private Product(int id, int stockId, string name, int price, string description, bool isExclusive)
+        private Product(int id, int stockId, string name, int price, string description,string category, bool isExclusive)
         {
             this.id = id;
             this.stockId = stockId;
@@ -30,9 +30,9 @@ namespace ShopSystem
             this.isExclusive = isExclusive;
         }
 
-        public static Product createProduct(int id, int stockId,string name, int price, string description, bool isExclusive)
+        public static Product createProduct(int id, int stockId,string name, int price, string description, string category, bool isExclusive)
         {
-            Product product = new Product(id,stockId, name, price, description, isExclusive);
+            Product product = new Product(id,stockId, name, price, description, category, isExclusive);
             return product;
         }
     }

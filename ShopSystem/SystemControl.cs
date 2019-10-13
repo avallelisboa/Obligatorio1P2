@@ -6,26 +6,46 @@ namespace ShopSystem
 {
     public class SystemControl
     {
-        private SystemControl() { }        
-        private static SystemControl _systemControl = new SystemControl();
-        public static SystemControl getSystemControl() { return _systemControl; }
-        private List<Client> clients = new List<Client>();
-        private List<ProductStock> catalogue = new List<ProductStock>();
-        private List<Purchase> purchases = new List<Purchase>();
+        private SystemControl() { }                                                                  //Private constructor
+        private static SystemControl _systemControl = new SystemControl();                           //Just one instance
+        public static SystemControl getSystemControl() { return _systemControl; }                    //Get the instance
+        private List<Client> clients = new List<Client>();                                           //Clients list
+        private List<ProductStock> catalogue = new List<ProductStock>();                             //Catalogue list
+        private List<Purchase> purchases = new List<Purchase>();                                     //Purchases list
 
         public int NumberOfClients { get { return clients.Count; } }
         public List<ProductStock> getCatalogue() { return catalogue; }
 
-        public void controlAddCommonClient(string name, string celular, string mail, string address,string user, string password, bool isFromMontevideo)
+        public bool controlAddCommonClient(string name, string celular, string mail, string address,string user, string password, bool isFromMontevideo)
         {
             int id = clients.Count;
-            clients.Add(Common.AddCommonClient(id ,name, celular, address, mail, user, password, isFromMontevideo));
+            Client _client = Common.AddCommonClient(id, name, celular, address, mail, user, password, isFromMontevideo);
+            if (_client != null)
+            {
+                clients.Add(_client);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public void controlAddCompanyClient(string companyName, string bussinesName, int rut, string mail, string address, string user, string password, bool isFromMontevideo)
+        public bool controlAddCompanyClient(string companyName, string bussinesName, int rut, string mail, string address, string user, string password, bool isFromMontevideo)
         {
+            //TODO controls
+
             int id = clients.Count;
-            clients.Add(Company.AddCompanyClient(id,companyName, bussinesName, rut, address, mail, user, password, isFromMontevideo));               
+            Client _client = Company.AddCompanyClient(id, companyName, bussinesName, rut, address, mail, user, password, isFromMontevideo);
+            if(_client != null)
+            {
+                clients.Add(_client);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void preLoad()
@@ -70,8 +90,7 @@ namespace ShopSystem
             if (findClient(client.Id))
             {
                 Purchase _purchase = Purchase.getPurchase(client);
-            }           
-
+            }
         }
 
         public void addProductStock(string name, string description)
@@ -80,10 +99,10 @@ namespace ShopSystem
             catalogue.Add(new ProductStock(name,id,description));
         }
 
-        public void addProduct(ProductStock productStock, string name, int price, string description, bool isExclusive)
+        public void addProduct(ProductStock productStock, string name, int price, string description, string category, bool isExclusive)
         {
             int productStockId = productStock.StockId;
-            productStock.addProduct(price, description, isExclusive);
+            productStock.addProduct(price, description, category, isExclusive);
         }
     }
 }
