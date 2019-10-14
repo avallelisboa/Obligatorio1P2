@@ -50,7 +50,8 @@ namespace ShopSystem
 
         public void preLoad()
         {
-            throw new NotImplementedException();
+            controlAddCommonClient("Jorge", "091425631", "jorgito@gmail.com","Bulevar Artigas 87546", "jorge", "jorge", true);
+            controlAddCommonClient("Javier", "091879564", "javier@gmail.com", "Bulevar Artigas 97463", "javier", "javier", true);
         }
 
         public bool findClient(int id)

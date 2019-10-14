@@ -1,21 +1,20 @@
 using System;
+using System.Collections.Generic;
 using ShopSystem;
 
 namespace ConsoleApp
 {
     class Program
     {
-        private const string welcome = "";
         private static bool exit = false;
         private static SystemControl _system;
         static void Main(string[] args)
         {
             _system = SystemControl.getSystemControl();
-            //_system.preLoad();
+            _system.preLoad();
             while (!exit)
             {
                 Console.Clear();
-                Console.WriteLine(welcome);
                 Console.WriteLine("Presione el número de opción en su teclado númerico para realizar la operación correspondiente");
                 Console.WriteLine("------------------------------------------------------------------------------------------------");
                 Console.WriteLine("1 - Iniciar Sesión");
@@ -164,6 +163,7 @@ namespace ConsoleApp
                     {
                         Console.WriteLine("Los datos son correctos, la sesión ha sido iniciada \n Presione una tecla para continuar");
                         Console.ReadKey();
+                        Console.Clear();
                         clientMenu();
                     }
                     else
@@ -198,7 +198,64 @@ namespace ConsoleApp
 
         private static void clientMenu()
         {
-            throw new NotImplementedException();
+            bool isLogged = true;
+            while (isLogged)
+            {
+                Console.Clear();
+                Console.WriteLine("Presione el número de opción en su teclado númerico para realizar la operación correspondiente");
+                Console.WriteLine("------------------------------------------------------------------------------------------------");
+                Console.WriteLine("1 - Ver catálogo de productos");
+                Console.WriteLine("2 - Ver carrito de compras");
+                Console.WriteLine("3 - Configuraciones");
+                Console.WriteLine("0 - Salir");
+                Console.WriteLine("-------------------------------------------------------------------------------------------------");
+                ConsoleKey _key = Console.ReadKey(true).Key;
+                switch (_key)
+                {
+                    case ConsoleKey.NumPad1:
+                        productsCatalogue();
+                        break;
+                    case ConsoleKey.NumPad2:
+                        purchase();
+                        break;
+                    case ConsoleKey.NumPad3:
+                        settings();                        
+                        break;
+                    case ConsoleKey.NumPad0:
+                        isLogged = false;
+                        break;
+                }
+            }
+            
+        }
+
+        private static void productsCatalogue()
+        {
+            List<ProductStock> productStocks = _system.getCatalogue();
+            Console.WriteLine("Nombre              Precio       Cantidad        StockId");
+            foreach(ProductStock _productStock in productStocks)
+            {
+                Console.WriteLine(_productStock.Name+"              "+_productStock.Price+"       "+_productStock.ProductsQuantity+"        "+_productStock.StockId);
+            }
+            Console.ReadKey();
+        }
+
+        private static void purchase()
+        {
+
+        }
+
+        private static void settings()
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            
+            catch(Exception err)
+            {
+                errorHandling(err);
+            }
         }
         
         private static void errorHandling(Exception err)
