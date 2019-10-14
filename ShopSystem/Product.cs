@@ -11,6 +11,7 @@ namespace ShopSystem
         private string name;
         private int price;
         private string description;
+        private string category;
         private bool isExclusive;
 
         public int Id{ get { return id; } set { id = value; } }
@@ -18,6 +19,12 @@ namespace ShopSystem
         public string Name{get{return name;}}
         public int Price{get{return price;}}
         public string Description { get { return description; } }
+        public string Category {
+            get { return category; }
+            set {
+                if (value == "Frescos" || value == "Congelados" || value == "Hogar" || value == "Téxtiles" || value == "Tecnología") category = value;
+            }
+        }
         private bool IsExclusive{get{return isExclusive;}}
 
         private Product(int id, int stockId, string name, int price, string description,string category, bool isExclusive)
@@ -27,6 +34,7 @@ namespace ShopSystem
             this.name = name;
             this.price = price;
             this.description = description;
+            this.category = category;
             this.isExclusive = isExclusive;
         }
 
