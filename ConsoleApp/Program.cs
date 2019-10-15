@@ -247,7 +247,10 @@ namespace ConsoleApp
             try
             {
                 List<ProductStock> productStocks = _system.getCatalogue();
-                Console.WriteLine("Nombre              Precio       Cantidad        ProductId");
+                string line = "-----------------------------------------------------------------------------------------------";
+                Console.WriteLine(line);
+                Console.WriteLine("|Nombre       |       Precio       Cantidad      |   StockId    |   ProductId|");
+                Console.WriteLine(line);
                 switch (k)
                 {
                     case ConsoleKey.NumPad1:
@@ -258,7 +261,9 @@ namespace ConsoleApp
                                 List<Product> _products = _productStock.ProductsList;
                                 foreach(Product p in _products)
                                 {
-                                    Console.WriteLine(p.Name + "              " + p.Price + "       " + p.Quantity + "        " + p.Id);
+                                    Console.WriteLine(line);
+                                    Console.WriteLine("|"+ p.Name + "       |       " + p.Price + "      |       " + p.Quantity + "      |    "+p.StockId+"      |       " + p.Id);
+                                    Console.WriteLine(line);
                                 }
                             }                                
                         }
@@ -271,7 +276,9 @@ namespace ConsoleApp
                                 List<Product> _products = _productStock.ProductsList;
                                 foreach (Product p in _products)
                                 {
-                                    Console.WriteLine(p.Name + "              " + p.Price + "       " + p.Quantity + "        " + p.Id);
+                                    Console.WriteLine(line);
+                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "        |       " + p.Quantity + "        |      " + p.StockId + "    |      " + p.Id);
+                                    Console.WriteLine(line);
                                 }
                             }
                         }
@@ -284,7 +291,9 @@ namespace ConsoleApp
                                 List<Product> _products = _productStock.ProductsList;
                                 foreach (Product p in _products)
                                 {
-                                    Console.WriteLine(p.Name + "              " + p.Price + "       " + p.Quantity + "        " + p.Id);
+                                    Console.WriteLine(line);
+                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "       |    " + p.Quantity + "        |       " + p.StockId + "        |       " + p.Id);
+                                    Console.WriteLine(line);
                                 }
                             }
                         }
@@ -297,7 +306,9 @@ namespace ConsoleApp
                                 List<Product> _products = _productStock.ProductsList;
                                 foreach (Product p in _products)
                                 {
-                                    Console.WriteLine(p.Name + "              " + p.Price + "       " + p.Quantity + "        " + p.Id);
+                                    Console.WriteLine(line);
+                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "          |         " + p.Quantity + "         |     " + p.StockId + "         |       " + p.Id);
+                                    Console.WriteLine(line);
                                 }
                             }
                         }
@@ -310,7 +321,9 @@ namespace ConsoleApp
                                 List<Product> _products = _productStock.ProductsList;
                                 foreach (Product p in _products)
                                 {
-                                    Console.WriteLine(p.Name + "              " + p.Price + "       " + p.Quantity + "        " + p.Id);
+                                    Console.WriteLine(line);
+                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "       |       " + p.Quantity + "       |       " + p.StockId + "      |      " + p.Id);
+                                    Console.WriteLine(line);
                                 }
                             }
                         }
@@ -321,7 +334,9 @@ namespace ConsoleApp
                             List<Product> _products = _productStock.ProductsList;
                             foreach (Product p in _products)
                             {
-                                Console.WriteLine(p.Name + "              " + p.Price + "       " + p.Quantity + "        " + p.Id);
+                                Console.WriteLine(line);
+                                Console.WriteLine("|" + p.Name + "         |          " + p.Price + "      |        " + p.Quantity + "        |        " + p.StockId + "       |        " + p.Id);
+                                Console.WriteLine(line);
                             }                            
                         }
                         break;
