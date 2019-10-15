@@ -52,6 +52,7 @@ namespace ShopSystem
         {
             controlAddCommonClient("Jorge", "091425631", "jorgito@gmail.com","Bulevar Artigas 87546", "jorge", "jorge", true);
             controlAddCommonClient("Javier", "091879564", "javier@gmail.com", "Bulevar Artigas 97463", "javier", "javier", true);
+            //TODO Alta de los productos
         }
 
         public bool findClient(int id)
@@ -100,10 +101,10 @@ namespace ShopSystem
             catalogue.Add(new ProductStock(name,id,description));
         }
 
-        public void addProduct(ProductStock productStock, string name, int price, string description, string category, bool isExclusive)
+        public void addProduct(ProductStock productStock, string name, int price, string description, bool isExclusive)
         {
             int productStockId = productStock.StockId;
-            productStock.addProduct(price, description, category, isExclusive);
+            productStock.addProduct(price, description, isExclusive);
         }
     }
 }

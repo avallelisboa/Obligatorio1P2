@@ -19,7 +19,7 @@ namespace ConsoleApp
                 Console.WriteLine("------------------------------------------------------------------------------------------------");
                 Console.WriteLine("1 - Iniciar Sesión");
                 Console.WriteLine("2 - Registrarse");
-                Console.WriteLine("3 - Configuraciones");
+                Console.WriteLine("3 - Sistema");
                 Console.WriteLine("0 - Salir");
                 Console.WriteLine("-------------------------------------------------------------------------------------------------");
                 bool optionNotCorrect = true;
@@ -38,7 +38,7 @@ namespace ConsoleApp
                             break;
                         case ConsoleKey.NumPad3:
                             outLoop();
-                            setUp();
+                            system();
                             break;
                         case ConsoleKey.NumPad0:
                             outLoop();
@@ -184,15 +184,17 @@ namespace ConsoleApp
             }            
         }
 
-        private static void setUp()
+        private static void system()
         {
-            try
+            bool optionIsNotCorrect = true;
+            while (optionIsNotCorrect)
             {
-                throw new NotImplementedException();
-            }
-            catch (Exception err)
-            {
-                errorHandling(err);
+                Console.Clear();
+
+                /*TODO
+                    - Dada una fecha indicar los clientes registrados en esa fecha(Nombre, Email y tipo de cliente)
+                    - Alta de productos en el catálogo
+                */
             }
         }
 
@@ -213,7 +215,16 @@ namespace ConsoleApp
                 switch (_key)
                 {
                     case ConsoleKey.NumPad1:
-                        productsCatalogue();
+                        Console.Clear();
+                        Console.WriteLine("Seleccione la categoría");
+                        Console.WriteLine("0 - Todas");
+                        Console.WriteLine("1 - Frescos");
+                        Console.WriteLine("2 - Congelados");
+                        Console.WriteLine("3 - Hogar");
+                        Console.WriteLine("4 - Textiles");
+                        Console.WriteLine("5 - Tecnología");
+                        ConsoleKey k = Console.ReadKey(true).Key;
+                        productsCatalogue(k);
                         break;
                     case ConsoleKey.NumPad2:
                         purchase();
@@ -229,20 +240,90 @@ namespace ConsoleApp
             
         }
 
-        private static void productsCatalogue()
+        private static void productsCatalogue(ConsoleKey k)
         {
-            List<ProductStock> productStocks = _system.getCatalogue();
-            Console.WriteLine("Nombre              Precio       Cantidad        StockId");
-            foreach(ProductStock _productStock in productStocks)
+            try
             {
-                Console.WriteLine(_productStock.Name+"              "+_productStock.Price+"       "+_productStock.ProductsQuantity+"        "+_productStock.StockId);
+                List<ProductStock> productStocks = _system.getCatalogue();
+                Console.WriteLine("Nombre              Precio       Cantidad        StockId");
+                switch (k)
+                {
+                    case ConsoleKey.NumPad1:
+                        foreach (ProductStock _productStock in productStocks)
+                        {
+                            if (_productStock.Category == "Frescos") Console.WriteLine(_productStock.Name + "              " + _productStock.Price + "       " + _productStock.ProductsQuantity + "        " + _productStock.StockId);
+                        }
+                        break;
+                    case ConsoleKey.NumPad2:
+                        foreach (ProductStock _productStock in productStocks)
+                        {
+                            if (_productStock.Category == "Congelados") Console.WriteLine(_productStock.Name + "              " + _productStock.Price + "       " + _productStock.ProductsQuantity + "        " + _productStock.StockId);
+                        }
+                        break;
+                    case ConsoleKey.NumPad3:
+                        foreach (ProductStock _productStock in productStocks)
+                        {
+                            if (_productStock.Category == "Hogar") Console.WriteLine(_productStock.Name + "              " + _productStock.Price + "       " + _productStock.ProductsQuantity + "        " + _productStock.StockId);
+                        }
+                        break;
+                    case ConsoleKey.NumPad4:
+                        foreach (ProductStock _productStock in productStocks)
+                        {
+                            if (_productStock.Category == "Téxtiles") Console.WriteLine(_productStock.Name + "              " + _productStock.Price + "       " + _productStock.ProductsQuantity + "        " + _productStock.StockId);
+                        }
+                        break;
+                    case ConsoleKey.NumPad5:
+                        foreach (ProductStock _productStock in productStocks)
+                        {
+                            if (_productStock.Category == "Tecnología") Console.WriteLine(_productStock.Name + "              " + _productStock.Price + "       " + _productStock.ProductsQuantity + "        " + _productStock.StockId);
+                        }
+                        break;
+                    default:
+                        foreach (ProductStock _productStock in productStocks)
+                        {
+                            Console.WriteLine(_productStock.Name + "              " + _productStock.Price + "       " + _productStock.ProductsQuantity + "        " + _productStock.StockId);
+                        }
+                        break;
+                }
+                Console.WriteLine("presione \"a\" para agregar productos al carrito");
+                Console.WriteLine("presione \"v\" para volver");
+                bool optionCorrect = false;
+                while (!optionCorrect)
+                {
+                    ConsoleKey o = Console.ReadKey(true).Key;
+                    if (o == ConsoleKey.A)
+                    {
+                        optionCorrect = true;
+                        Console.WriteLine("Ingrese el Id del stock del producto que desea agregar");
+                        int stockId = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Ingrese la cantidad de productos que desea agregar");
+                        int quantity = Convert.ToInt32(Console.ReadLine());
+
+                        //To Finish
+                    }
+                    else if (o == ConsoleKey.V)
+                    {
+                        optionCorrect = true;
+                    }
+                }
             }
-            Console.ReadKey();
+            catch(Exception err)
+            {
+                errorHandling(err);
+            }
         }
 
         private static void purchase()
         {
+            try
+            {
+                throw new NotImplementedException();
+            }
 
+            catch (Exception err)
+            {
+                errorHandling(err);
+            }
         }
 
         private static void settings()
