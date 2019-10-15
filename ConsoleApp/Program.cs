@@ -88,7 +88,7 @@ namespace ConsoleApp
                         {
                             isFromMontevideo = true;
                         }
-                        registerSuccessful = _system.controlAddCommonClient(name, celular, mail, address, user, password, isFromMontevideo);
+                        registerSuccessful = _system.addCommonClient(name, celular, mail, address, user, password, isFromMontevideo);
                         Console.Clear();
                     }
 
@@ -105,6 +105,8 @@ namespace ConsoleApp
                         string address = Console.ReadLine();
                         Console.WriteLine("Ingrese su mail");
                         string mail = Console.ReadLine();
+                        Console.WriteLine("Ingrese su número telefónico");
+                        string phone = Console.ReadLine();
                         Console.WriteLine("Ingrese su usuario");
                         string user = Console.ReadLine();
                         Console.WriteLine("Ingrese su contraseña");
@@ -116,7 +118,7 @@ namespace ConsoleApp
                         {
                             isFromMontevideo = true;
                         }
-                        registerSuccessful = _system.controlAddCompanyClient(companyName, bussinesName, rut, address, mail, user, password, isFromMontevideo);
+                        registerSuccessful = _system.addCompanyClient(companyName, bussinesName, rut, address, mail, phone, user, password, isFromMontevideo);
                         Console.Clear();
                     }
                     else
@@ -245,43 +247,82 @@ namespace ConsoleApp
             try
             {
                 List<ProductStock> productStocks = _system.getCatalogue();
-                Console.WriteLine("Nombre              Precio       Cantidad        StockId");
+                Console.WriteLine("Nombre              Precio       Cantidad        ProductId");
                 switch (k)
                 {
                     case ConsoleKey.NumPad1:
                         foreach (ProductStock _productStock in productStocks)
                         {
-                            if (_productStock.Category == "Frescos") Console.WriteLine(_productStock.Name + "              " + _productStock.Price + "       " + _productStock.ProductsQuantity + "        " + _productStock.StockId);
+                            if (_productStock.Name == "Frescos")
+                            {
+                                List<Product> _products = _productStock.ProductsList;
+                                foreach(Product p in _products)
+                                {
+                                    Console.WriteLine(p.Name + "              " + p.Price + "       " + p.Quantity + "        " + p.Id);
+                                }
+                            }                                
                         }
                         break;
                     case ConsoleKey.NumPad2:
                         foreach (ProductStock _productStock in productStocks)
                         {
-                            if (_productStock.Category == "Congelados") Console.WriteLine(_productStock.Name + "              " + _productStock.Price + "       " + _productStock.ProductsQuantity + "        " + _productStock.StockId);
+                            if (_productStock.Name == "Congelados")
+                            {
+                                List<Product> _products = _productStock.ProductsList;
+                                foreach (Product p in _products)
+                                {
+                                    Console.WriteLine(p.Name + "              " + p.Price + "       " + p.Quantity + "        " + p.Id);
+                                }
+                            }
                         }
                         break;
                     case ConsoleKey.NumPad3:
                         foreach (ProductStock _productStock in productStocks)
                         {
-                            if (_productStock.Category == "Hogar") Console.WriteLine(_productStock.Name + "              " + _productStock.Price + "       " + _productStock.ProductsQuantity + "        " + _productStock.StockId);
+                            if (_productStock.Name == "Hogar")
+                            {
+                                List<Product> _products = _productStock.ProductsList;
+                                foreach (Product p in _products)
+                                {
+                                    Console.WriteLine(p.Name + "              " + p.Price + "       " + p.Quantity + "        " + p.Id);
+                                }
+                            }
                         }
                         break;
                     case ConsoleKey.NumPad4:
                         foreach (ProductStock _productStock in productStocks)
                         {
-                            if (_productStock.Category == "Téxtiles") Console.WriteLine(_productStock.Name + "              " + _productStock.Price + "       " + _productStock.ProductsQuantity + "        " + _productStock.StockId);
+                            if (_productStock.Name == "Téxtiles")
+                            {
+                                List<Product> _products = _productStock.ProductsList;
+                                foreach (Product p in _products)
+                                {
+                                    Console.WriteLine(p.Name + "              " + p.Price + "       " + p.Quantity + "        " + p.Id);
+                                }
+                            }
                         }
                         break;
                     case ConsoleKey.NumPad5:
                         foreach (ProductStock _productStock in productStocks)
                         {
-                            if (_productStock.Category == "Tecnología") Console.WriteLine(_productStock.Name + "              " + _productStock.Price + "       " + _productStock.ProductsQuantity + "        " + _productStock.StockId);
+                            if (_productStock.Name == "Tecnología")
+                            {
+                                List<Product> _products = _productStock.ProductsList;
+                                foreach (Product p in _products)
+                                {
+                                    Console.WriteLine(p.Name + "              " + p.Price + "       " + p.Quantity + "        " + p.Id);
+                                }
+                            }
                         }
                         break;
                     default:
                         foreach (ProductStock _productStock in productStocks)
-                        {
-                            Console.WriteLine(_productStock.Name + "              " + _productStock.Price + "       " + _productStock.ProductsQuantity + "        " + _productStock.StockId);
+                        {                           
+                            List<Product> _products = _productStock.ProductsList;
+                            foreach (Product p in _products)
+                            {
+                                Console.WriteLine(p.Name + "              " + p.Price + "       " + p.Quantity + "        " + p.Id);
+                            }                            
                         }
                         break;
                 }

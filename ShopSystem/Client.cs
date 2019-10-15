@@ -24,11 +24,12 @@ namespace ShopSystem
         public string Password { get { return password; } }
         public bool IsFromMontevideo { get { return isFromMontevideo; } }
 
-        internal Client(int id, string address, string mail, string user, string password, bool isFromMontevideo)
+        internal Client(int id, string address, string mail, string phone, string user, string password, bool isFromMontevideo)
         {
             this.id = id;
             this.address = address;
             this.mail = mail;
+            this.phone = phone;
             this.user = user;
             this.password = password;
             this.isFromMontevideo = isFromMontevideo;

@@ -16,7 +16,7 @@ namespace ShopSystem
         public int NumberOfClients { get { return clients.Count; } }
         public List<ProductStock> getCatalogue() { return catalogue; }
 
-        public bool controlAddCommonClient(string name, string celular, string mail, string address,string user, string password, bool isFromMontevideo)
+        public bool addCommonClient(string name, string celular, string mail, string address,string user, string password, bool isFromMontevideo)
         {
             int id = clients.Count;
             Client _client = Common.AddCommonClient(id, name, celular, address, mail, user, password, isFromMontevideo);
@@ -31,12 +31,12 @@ namespace ShopSystem
             }
         }
 
-        public bool controlAddCompanyClient(string companyName, string bussinesName, int rut, string mail, string address, string user, string password, bool isFromMontevideo)
+        public bool addCompanyClient(string companyName, string bussinesName, int rut, string mail, string phone, string address, string user, string password, bool isFromMontevideo)
         {
             //TODO controls
 
             int id = clients.Count;
-            Client _client = Company.AddCompanyClient(id, companyName, bussinesName, rut, address, mail, user, password, isFromMontevideo);
+            Client _client = Company.AddCompanyClient(id, companyName, bussinesName, rut, address, mail,phone, user, password, isFromMontevideo);
             if(_client != null)
             {
                 clients.Add(_client);
@@ -50,9 +50,25 @@ namespace ShopSystem
 
         public void preLoad()
         {
-            controlAddCommonClient("Jorge", "091425631", "jorgito@gmail.com","Bulevar Artigas 87546", "jorge", "jorge", true);
-            controlAddCommonClient("Javier", "091879564", "javier@gmail.com", "Bulevar Artigas 97463", "javier", "javier", true);
-            //TODO Alta de los productos
+            addCommonClient("Jorge", "091425631", "jorgito@gmail.com","Bulevar Artigas 87546", "jorge", "jorge", true);
+            addCommonClient("Javier", "091879564", "javier@gmail.com", "Bulevar Artigas 97463", "javier", "javier", true);
+
+            addProductStock("Frescos"); addProductStock("Congelados"); addProductStock("Hogar"); addProductStock("Téxtiles"); addProductStock("Tecnología");
+
+            catalogue[0].addProduct("Escarola", 59, "Precio por Kg", false);
+            catalogue[0].addProduct("Espinaca", 24, "Precio por Kg", false);
+
+            catalogue[1].addProduct("Croquetas", 99, "Precio por Kg", false);
+            catalogue[1].addProduct("Buñuelo", 40, "Precio por Kg", false);
+
+            catalogue[2].addProduct("Detergente", 60, "Precio por L", false);
+            catalogue[2].addProduct("Jabón de manos", 35,"Precio por unidad", false);
+
+            catalogue[3].addProduct("Toallas", 70, "Precio por unidad", false);
+            catalogue[3].addProduct("Sábanas", 150, "Precio por unidad", false);
+
+            catalogue[4].addProduct("PC Gamer", 12500, "Precio por unidad", false);
+            catalogue[4].addProduct("Televisor Led", 15000, "Precio por unidad", true);
         }
 
         public bool findClient(int id)
@@ -95,16 +111,20 @@ namespace ShopSystem
             }
         }
 
-        public void addProductStock(string name, string description)
+        public string addProductStock(string name)
         {
             int id = catalogue.Count;
-            catalogue.Add(new ProductStock(name,id,description));
-        }
-
-        public void addProduct(ProductStock productStock, string name, int price, string description, bool isExclusive)
-        {
-            int productStockId = productStock.StockId;
-            productStock.addProduct(price, description, isExclusive);
+            bool wasFounded = false;
+            foreach(ProductStock s in catalogue)
+            {
+                if (s.Name == name) wasFounded = true;
+            }
+            if (!wasFounded)
+            {
+                catalogue.Add(new ProductStock(name,id));
+                return "The product stock was successfully created";
+            }
+            else return "The product stock was already created";
         }
     }
 }
