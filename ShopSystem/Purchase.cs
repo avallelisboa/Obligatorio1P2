@@ -10,7 +10,13 @@ namespace ShopSystem
         private List<ProductStock> productStocks = new List<ProductStock>();
         private List<_product> productsToBuy = new List<_product>();
         private int totalPrice = 0;
-        private Purchase(Client client){ this.client = client;}
+        private DateTime date;
+        private Purchase(Client client, List<ProductStock>productStocks)
+        {
+            this.client = client;
+            this.productStocks = productStocks;
+            this.date = DateTime.Today;
+        }
         private class _product
         {
             public int productId;
@@ -18,17 +24,19 @@ namespace ShopSystem
             public int quantity;
         }
 
+        public DateTime Date { get { return date; } }
+
 
         private int calculatePurchasePrice()
         {
             return totalPrice;
         }
 
-        public static Purchase getPurchase(Client client)
+        public static Purchase getPurchase(Client client, List<ProductStock> productStocks)
         {
-            return new Purchase(client);
+            return new Purchase(client, productStocks);
         }
-
+   
         public string buy()
         {
             int productsToBuyNumber = productsToBuy.Count;
@@ -52,7 +60,7 @@ namespace ShopSystem
                 p.stockId = stockId;
                 p.quantity = _product.quantity;
                 productsToBuy.Add(p);
-                totalPrice += _product.price;
+                totalPrice += (_product.price) * (_product.quantity);
                 return "The products were added correctly";
             }
             else return "The product could not be added";

@@ -224,15 +224,13 @@ namespace ConsoleApp
         private static void clientMenu()
         {
             bool isLogged = true;
-            var purchase = _system.getPurchase();
             while (isLogged)
             {
                 Console.Clear();
                 Console.WriteLine("Presione el número de opción en su teclado númerico para realizar la operación correspondiente");
                 Console.WriteLine("------------------------------------------------------------------------------------------------");
                 Console.WriteLine("1 - Ver catálogo de productos");
-                Console.WriteLine("2 - Ver carrito de compras");
-                Console.WriteLine("3 - Configuraciones");
+                Console.WriteLine("2 - Configuraciones");
                 Console.WriteLine("0 - Salir");
                 Console.WriteLine("-------------------------------------------------------------------------------------------------");
 
@@ -241,22 +239,162 @@ namespace ConsoleApp
 
                 {
                     case ConsoleKey.NumPad1:
-                        Console.Clear();
-                        Console.WriteLine("Seleccione la categoría");
-                        Console.WriteLine("0 - Todas");
-                        Console.WriteLine("1 - Frescos");
-                        Console.WriteLine("2 - Congelados");
-                        Console.WriteLine("3 - Hogar");
-                        Console.WriteLine("4 - Textiles");
-                        Console.WriteLine("5 - Tecnología");
-                        ConsoleKey k = Console.ReadKey(true).Key;
-                        productsCatalogue(k);
+                        try
+                        {
+                            var purchase = _system.getPurchase();
+                            bool hasPurchaseEnded = false;
+                            while (!hasPurchaseEnded)
+                            {                                
+                                Console.Clear();
+                                Console.WriteLine("Seleccione la categoría");
+                                Console.WriteLine("0 - Todas");
+                                Console.WriteLine("1 - Frescos");
+                                Console.WriteLine("2 - Congelados");
+                                Console.WriteLine("3 - Hogar");
+                                Console.WriteLine("4 - Textiles");
+                                Console.WriteLine("5 - Tecnología");
+                                ConsoleKey k = Console.ReadKey(true).Key;
+                           
+
+                                Console.Clear();
+                                List<ProductStock> productStocks = _system.getCatalogue();
+                                string line = "-----------------------------------------------------------------------------------------------";
+                                Console.WriteLine(line);
+                                Console.WriteLine("|Nombre       |       Precio       Cantidad      |   StockId    |   ProductId|");
+                                Console.WriteLine(line);
+                                switch (k)
+                                {
+                                    case ConsoleKey.NumPad1:
+                                        foreach (ProductStock _productStock in productStocks)
+                                        {
+                                            if (_productStock.Name == "Frescos")
+                                            {
+                                                List<Product> _products = _productStock.Products;
+                                                foreach (Product p in _products)
+                                                {
+                                                    Console.WriteLine(line);
+                                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "      |       " + p.Quantity + "      |    " + p.StockId + "      |       " + p.Id);
+                                                    Console.WriteLine(line);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case ConsoleKey.NumPad2:
+                                        foreach (ProductStock _productStock in productStocks)
+                                        {
+                                            if (_productStock.Name == "Congelados")
+                                            {
+                                                List<Product> _products = _productStock.Products;
+                                                foreach (Product p in _products)
+                                                {
+                                                    Console.WriteLine(line);
+                                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "        |       " + p.Quantity + "        |      " + p.StockId + "    |      " + p.Id);
+                                                    Console.WriteLine(line);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case ConsoleKey.NumPad3:
+                                        foreach (ProductStock _productStock in productStocks)
+                                        {
+                                            if (_productStock.Name == "Hogar")
+                                            {
+                                                List<Product> _products = _productStock.Products;
+                                                foreach (Product p in _products)
+                                                {
+                                                    Console.WriteLine(line);
+                                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "       |    " + p.Quantity + "        |       " + p.StockId + "        |       " + p.Id);
+                                                    Console.WriteLine(line);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case ConsoleKey.NumPad4:
+                                        foreach (ProductStock _productStock in productStocks)
+                                        {
+                                            if (_productStock.Name == "Téxtiles")
+                                            {
+                                                List<Product> _products = _productStock.Products;
+                                                foreach (Product p in _products)
+                                                {
+                                                    Console.WriteLine(line);
+                                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "          |         " + p.Quantity + "         |     " + p.StockId + "         |       " + p.Id);
+                                                    Console.WriteLine(line);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case ConsoleKey.NumPad5:
+                                        foreach (ProductStock _productStock in productStocks)
+                                        {
+                                            if (_productStock.Name == "Tecnología")
+                                            {
+                                                List<Product> _products = _productStock.Products;
+                                                foreach (Product p in _products)
+                                                {
+                                                    Console.WriteLine(line);
+                                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "       |       " + p.Quantity + "       |       " + p.StockId + "      |      " + p.Id);
+                                                    Console.WriteLine(line);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    default:
+                                        foreach (ProductStock _productStock in productStocks)
+                                        {
+                                            List<Product> _products = _productStock.Products;
+                                            foreach (Product p in _products)
+                                            {
+                                                Console.WriteLine(line);
+                                                Console.WriteLine("|" + p.Name + "         |          " + p.Price + "      |        " + p.Quantity + "        |        " + p.StockId + "       |        " + p.Id);
+                                                Console.WriteLine(line);
+                                            }
+                                        }
+                                        break;
+                                }
+                                Console.WriteLine("presione \"a\" para agregar productos al carrito");
+                                Console.WriteLine("presione \"v\" para volver");
+                                bool optionCorrect = false;
+                                while (!optionCorrect)
+                                {
+                                    ConsoleKey o = Console.ReadKey(true).Key;
+                                    if (o == ConsoleKey.A)
+                                    {
+                                        optionCorrect = true;
+                                        Console.WriteLine("Ingrese el Id del stock del producto que desea agregar");
+                                        int stockId = Convert.ToInt32(Console.ReadLine());
+                                        Console.WriteLine("Ingrese el Id del producto que desea agregar");
+                                        int productId = Convert.ToInt32(Console.ReadLine());
+                                        Console.WriteLine("Ingrese la cantidad de productos que desea agregar");
+                                        int quantity = Convert.ToInt32(Console.ReadLine());
+                                        string message = purchase.addToPurchase(stockId, productId, quantity);
+                                        Console.Clear();
+                                        Console.WriteLine(message);
+                                        Console.WriteLine("Precione \"c\" para finalizar la compra o cualquier otra tecla para continuar comprando");
+                                        ConsoleKey _k = Console.ReadKey(true).Key;
+                                        if (_k == ConsoleKey.C)
+                                        {
+                                            message = purchase.buy();
+                                            Console.WriteLine(message);
+                                            Console.WriteLine("Presione una tecla para continuar");
+                                            Console.ReadKey();
+                                            hasPurchaseEnded = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        optionCorrect = true;
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            errorHandling(err);
+                        }
                         break;
                     case ConsoleKey.NumPad2:
-                        purchaseMenu();
-                        break;
-                    case ConsoleKey.NumPad3:
-                        settings();                        
+                        settings();
                         break;
                     case ConsoleKey.NumPad0:
                         isLogged = false;
@@ -266,137 +404,6 @@ namespace ConsoleApp
             
         }
 
-        private static void productsCatalogue(ConsoleKey k)
-        {
-            try
-            {
-                List<ProductStock> productStocks = _system.getCatalogue();
-                string line = "-----------------------------------------------------------------------------------------------";
-                Console.WriteLine(line);
-                Console.WriteLine("|Nombre       |       Precio       Cantidad      |   StockId    |   ProductId|");
-                Console.WriteLine(line);
-                switch (k)
-                {
-                    case ConsoleKey.NumPad1:
-                        foreach (ProductStock _productStock in productStocks)
-                        {
-                            if (_productStock.Name == "Frescos")
-                            {
-                                List<Product> _products = _productStock.Products;
-                                foreach(Product p in _products)
-                                {
-                                    Console.WriteLine(line);
-                                    Console.WriteLine("|"+ p.Name + "       |       " + p.Price + "      |       " + p.Quantity + "      |    "+p.StockId+"      |       " + p.Id);
-                                    Console.WriteLine(line);
-                                }
-                            }                                
-                        }
-                        break;
-                    case ConsoleKey.NumPad2:
-                        foreach (ProductStock _productStock in productStocks)
-                        {
-                            if (_productStock.Name == "Congelados")
-                            {
-                                List<Product> _products = _productStock.Products;
-                                foreach (Product p in _products)
-                                {
-                                    Console.WriteLine(line);
-                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "        |       " + p.Quantity + "        |      " + p.StockId + "    |      " + p.Id);
-                                    Console.WriteLine(line);
-                                }
-                            }
-                        }
-                        break;
-                    case ConsoleKey.NumPad3:
-                        foreach (ProductStock _productStock in productStocks)
-                        {
-                            if (_productStock.Name == "Hogar")
-                            {
-                                List<Product> _products = _productStock.Products;
-                                foreach (Product p in _products)
-                                {
-                                    Console.WriteLine(line);
-                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "       |    " + p.Quantity + "        |       " + p.StockId + "        |       " + p.Id);
-                                    Console.WriteLine(line);
-                                }
-                            }
-                        }
-                        break;
-                    case ConsoleKey.NumPad4:
-                        foreach (ProductStock _productStock in productStocks)
-                        {
-                            if (_productStock.Name == "Téxtiles")
-                            {
-                                List<Product> _products = _productStock.Products;
-                                foreach (Product p in _products)
-                                {
-                                    Console.WriteLine(line);
-                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "          |         " + p.Quantity + "         |     " + p.StockId + "         |       " + p.Id);
-                                    Console.WriteLine(line);
-                                }
-                            }
-                        }
-                        break;
-                    case ConsoleKey.NumPad5:
-                        foreach (ProductStock _productStock in productStocks)
-                        {
-                            if (_productStock.Name == "Tecnología")
-                            {
-                                List<Product> _products = _productStock.Products;
-                                foreach (Product p in _products)
-                                {
-                                    Console.WriteLine(line);
-                                    Console.WriteLine("|" + p.Name + "       |       " + p.Price + "       |       " + p.Quantity + "       |       " + p.StockId + "      |      " + p.Id);
-                                    Console.WriteLine(line);
-                                }
-                            }
-                        }
-                        break;
-                    default:
-                        foreach (ProductStock _productStock in productStocks)
-                        {                           
-                            List<Product> _products = _productStock.Products;
-                            foreach (Product p in _products)
-                            {
-                                Console.WriteLine(line);
-                                Console.WriteLine("|" + p.Name + "         |          " + p.Price + "      |        " + p.Quantity + "        |        " + p.StockId + "       |        " + p.Id);
-                                Console.WriteLine(line);
-                            }                            
-                        }
-                        break;
-                }
-                Console.WriteLine("presione \"a\" para agregar productos al carrito");
-                Console.WriteLine("presione \"v\" para volver");
-                bool optionCorrect = false;
-                while (!optionCorrect)
-                {
-                    ConsoleKey o = Console.ReadKey(true).Key;
-                    if (o == ConsoleKey.A)
-                    {
-                        optionCorrect = true;
-                        Console.WriteLine("Ingrese el Id del stock del producto que desea agregar");
-                        int stockId = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Ingrese la cantidad de productos que desea agregar");
-                        int quantity = Convert.ToInt32(Console.ReadLine());
-
-                        //To Finish
-                    }
-                    else if (o == ConsoleKey.V)
-                    {
-                        optionCorrect = true;
-                    }
-                }
-            }
-            catch(Exception err)
-            {
-                errorHandling(err);
-            }
-        }
-
-        private static void purchaseMenu() //Carrito de compras
-        {
-
-        }
 
         private static void settings() //Usar este método para agregar productos y listar clientes en las fechas
         {

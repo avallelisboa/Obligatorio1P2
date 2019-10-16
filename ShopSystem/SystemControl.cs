@@ -72,19 +72,29 @@ namespace ShopSystem
             addProductStock("Frescos"); addProductStock("Congelados"); addProductStock("Hogar"); addProductStock("Téxtiles"); addProductStock("Tecnología"); //Categorías precargadas
 
             catalogue[0].addProduct("Escarola", 59, "Precio por Kg", false);            //Nombre, precio, descripción, esDeMontevideo
+            catalogue[0].Products[0].addProducts(100);
             catalogue[0].addProduct("Espinaca", 24, "Precio por Kg", false);
+            catalogue[0].Products[1].addProducts(100);
 
             catalogue[1].addProduct("Croquetas", 99, "Precio por Kg", false);
+            catalogue[1].Products[0].addProducts(100);
             catalogue[1].addProduct("Buñuelo", 40, "Precio por Kg", false);
+            catalogue[1].Products[1].addProducts(100);
 
             catalogue[2].addProduct("Detergente", 60, "Precio por L", false);
+            catalogue[2].Products[0].addProducts(100);
             catalogue[2].addProduct("Jabón de manos", 35,"Precio por unidad", false);
+            catalogue[2].Products[1].addProducts(100);
 
             catalogue[3].addProduct("Toallas", 70, "Precio por unidad", false);
+            catalogue[3].Products[0].addProducts(100);
             catalogue[3].addProduct("Sábanas", 150, "Precio por unidad", false);
+            catalogue[3].Products[1].addProducts(100);
 
             catalogue[4].addProduct("PC Gamer", 12500, "Precio por unidad", false);
+            catalogue[4].Products[0].addProducts(100);
             catalogue[4].addProduct("Televisor Led", 15000, "Precio por unidad", true);
+            catalogue[4].Products[1].addProducts(1);
         }
 
         public bool login(string user, string password)
@@ -109,7 +119,8 @@ namespace ShopSystem
         {
             if (loggedClient != null)
             {
-                Purchase _purchase = Purchase.getPurchase(loggedClient);
+                Purchase _purchase = Purchase.getPurchase(loggedClient, catalogue);
+                purchases.Add(_purchase);
                 return _purchase;
             }
             else throw new Exception("There is no logged user");
