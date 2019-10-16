@@ -207,18 +207,42 @@ namespace ConsoleApp
                 Console.WriteLine("1 - Agregar productos");
                 Console.WriteLine("2 - Ver Clientes registrados");
 
-                ConsoleKey _key = Console.ReadKey(true).Key; //Obtiene la tecla presionada por el usuario y la almacena dentro de la variable _key
+                bool _optionNotCorrect = true;
+                while (_optionNotCorrect)
+                {
+                    ConsoleKey _key = Console.ReadKey(true).Key; //Obtiene la tecla presionada por el usuario y la almacena dentro de la variable _key
+                    switch (_key)
+                    {
+                        case ConsoleKey.NumPad1:
+                        case ConsoleKey.D1:
+                            outLoop();
+                            AddProducts();
+                            break;
+                        case ConsoleKey.NumPad2:
+                        case ConsoleKey.D2:
+                            outLoop();
+                            DisplayRegisteredClients();
+                            break;
+                    }
+                    void outLoop()
+                    {
+                        Console.Clear();
+                        _optionNotCorrect = false;
+                    }
+                }
 
-                
-                // var catalogue = _system.getCatalogue();//Obtener catalogo de productos(productStocks). Obtiene una lista
-                // catalogue[stockid].addProduct(string name, int price, string description,bool isExclusive)
-
-
-                /*TODO
-                    - Dada una fecha indicar los clientes registrados en esa fecha(Nombre, Email y tipo de cliente)
-                    - Alta de productos en el catálogo
-                */
             }
+        }
+        private static void AddProducts()
+        {
+            Console.Clear();
+            Console.WriteLine("Ingrese el nombre de su producto");
+            string productName = Console.ReadLine();
+        }
+
+        private static void DisplayRegisteredClients()
+        {
+
         }
 
         private static void clientMenu()
