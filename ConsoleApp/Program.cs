@@ -71,6 +71,8 @@ namespace ConsoleApp
                         Console.Clear();
                         Console.WriteLine("Ingrese su nombre");
                         string name = Console.ReadLine();
+                        Console.WriteLine("Ingrese su número de cédula");
+                        int identificationCard = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Ingrese su celular");
                         string celular = Console.ReadLine();
                         Console.WriteLine("Ingrese su dirección");
@@ -88,7 +90,9 @@ namespace ConsoleApp
                         {
                             isFromMontevideo = true;
                         }
-                        registerSuccessful = _system.addCommonClient(name, celular, mail, address, user, password, isFromMontevideo);
+                        var result = _system.addCommonClient(name, identificationCard, celular, mail, address, user, password, isFromMontevideo);
+                        registerSuccessful = result.wasRegisterSuccessful;
+                        string message = result.message;
                         Console.Clear();
                     }
 
@@ -118,7 +122,9 @@ namespace ConsoleApp
                         {
                             isFromMontevideo = true;
                         }
-                        registerSuccessful = _system.addCompanyClient(companyName, bussinesName, rut, address, mail, phone, user, password, isFromMontevideo);
+                        var result = _system.addCompanyClient(companyName, bussinesName, rut, address, mail, phone, user, password, isFromMontevideo);
+                        registerSuccessful = result.wasRegisterSuccessful;
+                        string message = result.message;
                         Console.Clear();
                     }
                     else
@@ -203,6 +209,7 @@ namespace ConsoleApp
         private static void clientMenu()
         {
             bool isLogged = true;
+            var purchase = _system.getPurchase();
             while (isLogged)
             {
                 Console.Clear();
@@ -229,7 +236,7 @@ namespace ConsoleApp
                         productsCatalogue(k);
                         break;
                     case ConsoleKey.NumPad2:
-                        purchase();
+                        purchaseMenu();
                         break;
                     case ConsoleKey.NumPad3:
                         settings();                        
@@ -258,7 +265,7 @@ namespace ConsoleApp
                         {
                             if (_productStock.Name == "Frescos")
                             {
-                                List<Product> _products = _productStock.ProductsList;
+                                List<Product> _products = _productStock.Products;
                                 foreach(Product p in _products)
                                 {
                                     Console.WriteLine(line);
@@ -273,7 +280,7 @@ namespace ConsoleApp
                         {
                             if (_productStock.Name == "Congelados")
                             {
-                                List<Product> _products = _productStock.ProductsList;
+                                List<Product> _products = _productStock.Products;
                                 foreach (Product p in _products)
                                 {
                                     Console.WriteLine(line);
@@ -288,7 +295,7 @@ namespace ConsoleApp
                         {
                             if (_productStock.Name == "Hogar")
                             {
-                                List<Product> _products = _productStock.ProductsList;
+                                List<Product> _products = _productStock.Products;
                                 foreach (Product p in _products)
                                 {
                                     Console.WriteLine(line);
@@ -303,7 +310,7 @@ namespace ConsoleApp
                         {
                             if (_productStock.Name == "Téxtiles")
                             {
-                                List<Product> _products = _productStock.ProductsList;
+                                List<Product> _products = _productStock.Products;
                                 foreach (Product p in _products)
                                 {
                                     Console.WriteLine(line);
@@ -318,7 +325,7 @@ namespace ConsoleApp
                         {
                             if (_productStock.Name == "Tecnología")
                             {
-                                List<Product> _products = _productStock.ProductsList;
+                                List<Product> _products = _productStock.Products;
                                 foreach (Product p in _products)
                                 {
                                     Console.WriteLine(line);
@@ -331,7 +338,7 @@ namespace ConsoleApp
                     default:
                         foreach (ProductStock _productStock in productStocks)
                         {                           
-                            List<Product> _products = _productStock.ProductsList;
+                            List<Product> _products = _productStock.Products;
                             foreach (Product p in _products)
                             {
                                 Console.WriteLine(line);
@@ -369,7 +376,7 @@ namespace ConsoleApp
             }
         }
 
-        private static void purchase()
+        private static void purchaseMenu()
         {
             try
             {

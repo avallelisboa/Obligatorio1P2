@@ -40,7 +40,7 @@ namespace ShopSystem
 
         public static Product createProduct(string name, int id, int stockId, int price, string description, bool isExclusive)
         {
-            Product product = new Product(name, id, stockId, price,description, isExclusive);
+            Product product = new Product(name, id, stockId, price, description, isExclusive);
             return product;
         }
 

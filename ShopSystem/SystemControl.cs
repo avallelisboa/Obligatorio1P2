@@ -12,47 +12,58 @@ namespace ShopSystem
         private List<Client> clients = new List<Client>();                                           //Clients list
         private List<ProductStock> catalogue = new List<ProductStock>();                             //Catalogue list
         private List<Purchase> purchases = new List<Purchase>();                                     //Purchases list
-
+        private Client loggedClient;
         public int NumberOfClients { get { return clients.Count; } }
         public List<ProductStock> getCatalogue() { return catalogue; }
 
-        public bool addCommonClient(string name, string celular, string mail, string address,string user, string password, bool isFromMontevideo)
+        public struct registerStatus
         {
-            int id = clients.Count;
-            Client _client = Common.AddCommonClient(id, name, celular, address, mail, user, password, isFromMontevideo);
-            if (_client != null)
+            public registerStatus(bool wasRegisterSuccessful, string message)
             {
-                clients.Add(_client);
-                return true;
+                this.wasRegisterSuccessful = wasRegisterSuccessful;
+                this.message = message;
             }
-            else
-            {
-                return false;
-            }
+            public bool wasRegisterSuccessful;
+            public string message;
         }
 
-        public bool addCompanyClient(string companyName, string bussinesName, int rut, string mail, string phone, string address, string user, string password, bool isFromMontevideo)
+        public registerStatus addCommonClient(string name, int identificationCard, string celular, string mail, string address,string user, string password, bool isFromMontevideo)
         {
-            //TODO controls
-
             int id = clients.Count;
-            Client _client = Company.AddCompanyClient(id, companyName, bussinesName, rut, address, mail,phone, user, password, isFromMontevideo);
-            if(_client != null)
+            var isClientInformationCorrect = Client.isInformationCorrect(clients, user, mail);
+            bool isMailUsed = isClientInformationCorrect.isMailUsed;
+            bool isUserUsed = isClientInformationCorrect.isUserUsed;
+            bool isCommonClientInformationCorrect;
+            if (!isMailUsed && !isUserUsed)
             {
+                Client _client = Common.AddCommonClient(id, name, identificationCard, celular, address, mail, user, password, isFromMontevideo);
                 clients.Add(_client);
-                return true;
+                return new registerStatus(true, "The user was registered successfully");
             }
-            else
+            else return new registerStatus(false, "The client was not registered");
+        }
+
+        public registerStatus addCompanyClient(string companyName, string bussinesName, int rut, string mail, string phone, string address, string user, string password, bool isFromMontevideo)
+        {
+            int id = clients.Count;
+            var isClientInformationCorrect = Client.isInformationCorrect(clients, user, mail);
+            bool isMailUsed = isClientInformationCorrect.isMailUsed;
+            bool isUserUsed = isClientInformationCorrect.isUserUsed;
+            bool isCompanyClientInformationCorrect;
+            if (!isMailUsed && isUserUsed)
             {
-                return false;
+                Client _client = Company.AddCompanyClient(id, companyName, bussinesName, rut, address, mail, phone, user, password, isFromMontevideo);
+                clients.Add(_client);
+                return new registerStatus(true,"The user was registered successfully");
             }
+            else return new registerStatus(false, "The client was not registered");
         }
 
         public void preLoad()
         {
-            addCommonClient("Jorge", "091425631", "jorgito@gmail.com","Bulevar Artigas 87546", "jorge", "jorge", true);
-            addCommonClient("Javier", "091879564", "javier@gmail.com", "Bulevar Artigas 97463", "javier", "javier", true);
-            addCommonClient("Juan", "091879564", "juan@gmail.com", "Bulevar Artigas 1087465", "juan", "juan", false);
+            addCommonClient("Jorge",45876212, "091425631", "jorgito@gmail.com","Bulevar Artigas 87546", "jorge", "jorge", true);
+            addCommonClient("Javier",54789653, "091879564", "javier@gmail.com", "Bulevar Artigas 97463", "javier", "javier", true);
+            addCommonClient("Juan",16549829, "091879564", "juan@gmail.com", "Bulevar Artigas 1087465", "juan", "juan", false);
 
             addCompanyClient("company1", "company1 s.a.", 154684654, "company1@gmail.com", "25842143579", "Luis Alberto de Herrera 154843223", "company1", "company1", true);
             addCompanyClient("company2", "company2 s.a.", 878746845, "company2@gmail.com", "65487651321", "Luis Alberto de Herrera 648948455", "company2", "company2", true);
@@ -76,21 +87,6 @@ namespace ShopSystem
             catalogue[4].addProduct("Televisor Led", 15000, "Precio por unidad", true);
         }
 
-        public bool findClient(int id)
-        {
-            bool wasFounded = false;
-            foreach(Client client in clients)
-            {
-                if (client.Id == id)
-                {
-                    wasFounded = true;
-                    break;
-                }                
-            }
-            if (wasFounded) return true;
-            else return false;
-        }
-
         public bool login(string user, string password)
         {
             bool wasFounded = false;
@@ -101,6 +97,7 @@ namespace ShopSystem
                 {
                     wasFounded = true;
                     if (client.Password == password) isPasswordCorrect = true;
+                    loggedClient = client;
                     break;
                 }
             }
@@ -108,12 +105,14 @@ namespace ShopSystem
             else return false;
         }
 
-        public void getPurchase(Client client)
+        public Purchase getPurchase()
         {
-            if (findClient(client.Id))
+            if (loggedClient != null)
             {
-                Purchase _purchase = Purchase.getPurchase(client);
+                Purchase _purchase = Purchase.getPurchase(loggedClient);
+                return _purchase;
             }
+            else throw new Exception("There is no logged user");
         }
 
         public string addProductStock(string name)

@@ -15,6 +15,17 @@ namespace ShopSystem
         private string password;
         private bool isFromMontevideo;
 
+        public struct clientValidation
+        {
+            public clientValidation(bool isMailUsed, bool isUserUsed)
+            {
+                this.isMailUsed = isMailUsed;
+                this.isUserUsed = isUserUsed;
+            }
+            public bool isMailUsed;
+            public bool isUserUsed;
+        }
+
         public int Id { get { return id; } }
         public string Phone { get { return phone; } }
         public string Address { get { return address; } }
@@ -36,6 +47,26 @@ namespace ShopSystem
             registerDate = DateTime.Today;
         }
 
+        public static clientValidation isInformationCorrect(List<Client>clients, string user, string mail)
+        {
+            int id = clients.Count;
+            bool isMailUsed = false;
+            bool isUserUsed = false;
+            foreach (Client c in clients)
+            {
+                if (c.Mail == mail)
+                {
+                    isMailUsed = true;
+                }
+                if (c.User == user)
+                {
+                    isUserUsed = true;
+                }
+                if (isUserUsed || isUserUsed) break;
+            }            
+            clientValidation clientValidation = new clientValidation(isMailUsed, isUserUsed);
+            return clientValidation;
+        }
         public override string ToString()
         {
             return base.ToString();
