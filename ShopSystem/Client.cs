@@ -15,7 +15,7 @@ namespace ShopSystem
         private string password;
         private bool isFromMontevideo;
 
-        public struct clientValidation
+        public class clientValidation
         {
             public clientValidation(bool isMailUsed, bool isUserUsed)
             {

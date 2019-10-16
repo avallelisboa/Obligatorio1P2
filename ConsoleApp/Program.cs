@@ -72,7 +72,7 @@ namespace ConsoleApp
                     Console.WriteLine("1 - Cliente común");
                     Console.WriteLine("2 - Cliente empresa");
                     ConsoleKey key = Console.ReadKey(true).Key;
-                    if (key == ConsoleKey.NumPad1)
+                    if (key == ConsoleKey.NumPad1 || key == ConsoleKey.D1)
                     {
                         Console.Clear();
                         Console.WriteLine("Ingrese su nombre");
@@ -102,7 +102,7 @@ namespace ConsoleApp
                         Console.Clear();
                     }
 
-                    else if (key == ConsoleKey.NumPad2)     //EJEMPLO DE MENU
+                    else if (key == ConsoleKey.NumPad2 || key == ConsoleKey.D2)     //EJEMPLO DE MENU
                     {
                         Console.Clear();
                         Console.WriteLine("Ingrese el nombre de su empresa");
@@ -239,6 +239,7 @@ namespace ConsoleApp
 
                 {
                     case ConsoleKey.NumPad1:
+                    case ConsoleKey.D1:
                         try
                         {
                             var purchase = _system.getPurchase();
@@ -265,6 +266,7 @@ namespace ConsoleApp
                                 switch (k)
                                 {
                                     case ConsoleKey.NumPad1:
+                                    case ConsoleKey.D1:
                                         foreach (ProductStock _productStock in productStocks)
                                         {
                                             if (_productStock.Name == "Frescos")
@@ -280,6 +282,7 @@ namespace ConsoleApp
                                         }
                                         break;
                                     case ConsoleKey.NumPad2:
+                                    case ConsoleKey.D2:
                                         foreach (ProductStock _productStock in productStocks)
                                         {
                                             if (_productStock.Name == "Congelados")
@@ -295,6 +298,7 @@ namespace ConsoleApp
                                         }
                                         break;
                                     case ConsoleKey.NumPad3:
+                                    case ConsoleKey.D3:
                                         foreach (ProductStock _productStock in productStocks)
                                         {
                                             if (_productStock.Name == "Hogar")
@@ -310,6 +314,7 @@ namespace ConsoleApp
                                         }
                                         break;
                                     case ConsoleKey.NumPad4:
+                                    case ConsoleKey.D4:
                                         foreach (ProductStock _productStock in productStocks)
                                         {
                                             if (_productStock.Name == "Téxtiles")
@@ -325,6 +330,7 @@ namespace ConsoleApp
                                         }
                                         break;
                                     case ConsoleKey.NumPad5:
+                                    case ConsoleKey.D5:
                                         foreach (ProductStock _productStock in productStocks)
                                         {
                                             if (_productStock.Name == "Tecnología")
@@ -394,9 +400,11 @@ namespace ConsoleApp
                         }
                         break;
                     case ConsoleKey.NumPad2:
+                    case ConsoleKey.D2:
                         settings();
                         break;
                     case ConsoleKey.NumPad0:
+                    case ConsoleKey.D0:
                         isLogged = false;
                         break;
                 }

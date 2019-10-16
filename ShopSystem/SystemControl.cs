@@ -33,8 +33,18 @@ namespace ShopSystem
             var isClientInformationCorrect = Client.isInformationCorrect(clients, user, mail);
             bool isMailUsed = isClientInformationCorrect.isMailUsed;
             bool isUserUsed = isClientInformationCorrect.isUserUsed;
-            bool isCommonClientInformationCorrect;
-            if (!isMailUsed && !isUserUsed)
+
+            List<Common> commonClientList = new List<Common>();
+            foreach(Client c in clients)
+            {
+                if(c.GetType() == typeof(Common))
+                {
+                    commonClientList.Add((Common)c);
+                }
+            }
+            var isCommonClientInformationCorrect = Common.isInformationCorrect(commonClientList, identificationCard);
+            bool isIdentificationCardUsed = isCommonClientInformationCorrect.isIdentificationCardUsed;
+            if (!isMailUsed && !isUserUsed && !isIdentificationCardUsed)
             {
                 Client _client = Common.AddCommonClient(id, name, identificationCard, celular, address, mail, user, password, isFromMontevideo);
                 clients.Add(_client);
@@ -49,8 +59,20 @@ namespace ShopSystem
             var isClientInformationCorrect = Client.isInformationCorrect(clients, user, mail);
             bool isMailUsed = isClientInformationCorrect.isMailUsed;
             bool isUserUsed = isClientInformationCorrect.isUserUsed;
-            bool isCompanyClientInformationCorrect;
-            if (!isMailUsed && isUserUsed)
+
+            List<Company> companyClientList = new List<Company>();
+            foreach (Client c in clients)
+            {
+                if (c.GetType() == typeof(Company))
+                {
+                    companyClientList.Add((Company)c);
+                }
+            }
+            var isCompanyClientInformationCorrect = Company.isInformationCorrect(companyClientList,companyName,bussinesName,rut);
+            bool isCompanyNameUsed = isCompanyClientInformationCorrect.isCompanyNameUsed;
+            bool isBussinesNameUsed = isCompanyClientInformationCorrect.isBussinesNameUsed;
+            bool isRutUsed = isCompanyClientInformationCorrect.isRutUsed;
+            if (!isMailUsed && !isUserUsed && !isCompanyNameUsed && !isBussinesNameUsed && !isRutUsed)
             {
                 Client _client = Company.AddCompanyClient(id, companyName, bussinesName, rut, address, mail, phone, user, password, isFromMontevideo);
                 clients.Add(_client);
