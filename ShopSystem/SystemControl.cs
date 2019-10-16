@@ -117,6 +117,28 @@ namespace ShopSystem
             catalogue[4].Products[0].addProducts(100);
             catalogue[4].addProduct("Televisor Led", 15000, "Precio por unidad", true);
             catalogue[4].Products[1].addProducts(1);
+
+            login("jorge", "jorge");
+            var purchase1 = getPurchase();
+            purchase1.addToPurchase(0, 0, 10);
+            purchase1.buy();
+            var purchase2 = getPurchase();
+            purchase2.addToPurchase(0, 1, 10);
+            purchase2.buy();
+            login("javier", "Javier");
+            var purchase3 = getPurchase();
+            purchase3.addToPurchase(1, 0, 10);
+            purchase3.buy();
+            var purchase4 = getPurchase();
+            purchase4.addToPurchase(1, 1, 10);
+            purchase4.buy();
+            login("juan", "juan");
+            var purchase5 = getPurchase();
+            purchase5.addToPurchase(2, 0, 10);
+            purchase5.buy();
+            var purchase6 = getPurchase();
+            purchase6.addToPurchase(2, 1, 10);
+            purchase6.buy();
         }
 
         public bool login(string user, string password)
