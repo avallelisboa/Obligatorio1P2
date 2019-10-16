@@ -10,13 +10,13 @@ namespace ShopSystem
         private static SystemControl _systemControl = new SystemControl();                           //Just one instance
         public static SystemControl getSystemControl() { return _systemControl; }                    //Get the instance
         private List<Client> clients = new List<Client>();                                           //Clients list
-        private List<ProductStock> catalogue = new List<ProductStock>();                             //Catalogue list
+        private List<ProductStock> catalogue = new List<ProductStock>();                             //Lista de productStocks(las categorías). Para cada categoría hay un productStock
         private List<Purchase> purchases = new List<Purchase>();                                     //Purchases list
         private Client loggedClient;
         public int NumberOfClients { get { return clients.Count; } }
         public List<ProductStock> getCatalogue() { return catalogue; }
 
-        public struct registerStatus
+        public class registerStatus
         {
             public registerStatus(bool wasRegisterSuccessful, string message)
             {
@@ -69,9 +69,9 @@ namespace ShopSystem
             addCompanyClient("company2", "company2 s.a.", 878746845, "company2@gmail.com", "65487651321", "Luis Alberto de Herrera 648948455", "company2", "company2", true);
             addCompanyClient("company3", "company3 s.a.", 346456148, "company3@gmail.com", "324564561551", "Luis Alberto de Herrera 878456456", "company3", "company3", false);
 
-            addProductStock("Frescos"); addProductStock("Congelados"); addProductStock("Hogar"); addProductStock("Téxtiles"); addProductStock("Tecnología");
+            addProductStock("Frescos"); addProductStock("Congelados"); addProductStock("Hogar"); addProductStock("Téxtiles"); addProductStock("Tecnología"); //Categorías precargadas
 
-            catalogue[0].addProduct("Escarola", 59, "Precio por Kg", false);
+            catalogue[0].addProduct("Escarola", 59, "Precio por Kg", false);            //Nombre, precio, descripción, esDeMontevideo
             catalogue[0].addProduct("Espinaca", 24, "Precio por Kg", false);
 
             catalogue[1].addProduct("Croquetas", 99, "Precio por Kg", false);

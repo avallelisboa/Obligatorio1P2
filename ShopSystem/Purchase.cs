@@ -11,7 +11,7 @@ namespace ShopSystem
         private List<_product> productsToBuy = new List<_product>();
         private int totalPrice = 0;
         private Purchase(Client client){ this.client = client;}
-        private struct _product
+        private class _product
         {
             public int productId;
             public int stockId;

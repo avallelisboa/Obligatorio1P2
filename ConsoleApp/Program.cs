@@ -10,8 +10,10 @@ namespace ConsoleApp
         private static SystemControl _system;
         static void Main(string[] args)
         {
-            _system = SystemControl.getSystemControl();
-            _system.preLoad();
+            _system = SystemControl.getSystemControl(); //Variable de acceso a clase administradora(contiene la instancia de la clase administradora)
+
+            _system.preLoad(); //Ejecuta la precarga
+
             while (!exit)
             {
                 Console.Clear();
@@ -19,7 +21,7 @@ namespace ConsoleApp
                 Console.WriteLine("------------------------------------------------------------------------------------------------");
                 Console.WriteLine("1 - Iniciar Sesión");
                 Console.WriteLine("2 - Registrarse");
-                Console.WriteLine("3 - Sistema");
+                Console.WriteLine("3 - Sistema"); //Alta de productos en el catálogo va acá.
                 Console.WriteLine("0 - Salir");
                 Console.WriteLine("-------------------------------------------------------------------------------------------------");
                 bool optionNotCorrect = true;
@@ -29,18 +31,22 @@ namespace ConsoleApp
                     switch (key)
                     {
                         case ConsoleKey.NumPad1:
+                        case ConsoleKey.D1:
                             outLoop();
                             signIn();
                             break;
                         case ConsoleKey.NumPad2:
+                        case ConsoleKey.D2:
                             outLoop();
                             register();
                             break;
                         case ConsoleKey.NumPad3:
+                        case ConsoleKey.D3:
                             outLoop();
                             system();
                             break;
                         case ConsoleKey.NumPad0:
+                        case ConsoleKey.D4:
                             outLoop();
                             exit = true;
                             break;
@@ -96,7 +102,7 @@ namespace ConsoleApp
                         Console.Clear();
                     }
 
-                    else if (key == ConsoleKey.NumPad2)
+                    else if (key == ConsoleKey.NumPad2)     //EJEMPLO DE MENU
                     {
                         Console.Clear();
                         Console.WriteLine("Ingrese el nombre de su empresa");
@@ -198,6 +204,15 @@ namespace ConsoleApp
             while (optionIsNotCorrect)
             {
                 Console.Clear();
+                Console.WriteLine("1 - Agregar productos");
+                Console.WriteLine("2 - Ver Clientes registrados");
+
+                ConsoleKey _key = Console.ReadKey(true).Key; //Obtiene la tecla presionada por el usuario y la almacena dentro de la variable _key
+
+                
+                // var catalogue = _system.getCatalogue();//Obtener catalogo de productos(productStocks). Obtiene una lista
+                // catalogue[stockid].addProduct(string name, int price, string description,bool isExclusive)
+
 
                 /*TODO
                     - Dada una fecha indicar los clientes registrados en esa fecha(Nombre, Email y tipo de cliente)
@@ -220,8 +235,10 @@ namespace ConsoleApp
                 Console.WriteLine("3 - Configuraciones");
                 Console.WriteLine("0 - Salir");
                 Console.WriteLine("-------------------------------------------------------------------------------------------------");
-                ConsoleKey _key = Console.ReadKey(true).Key;
+
+                ConsoleKey _key = Console.ReadKey(true).Key; //Guarda la tecla presionada
                 switch (_key)
+
                 {
                     case ConsoleKey.NumPad1:
                         Console.Clear();
@@ -376,30 +393,14 @@ namespace ConsoleApp
             }
         }
 
-        private static void purchaseMenu()
+        private static void purchaseMenu() //Carrito de compras
         {
-            try
-            {
-                throw new NotImplementedException();
-            }
 
-            catch (Exception err)
-            {
-                errorHandling(err);
-            }
         }
 
-        private static void settings()
+        private static void settings() //Usar este método para agregar productos y listar clientes en las fechas
         {
-            try
-            {
-                throw new NotImplementedException();
-            }
             
-            catch(Exception err)
-            {
-                errorHandling(err);
-            }
         }
         
         private static void errorHandling(Exception err)

@@ -10,7 +10,7 @@ namespace ShopSystem
         private int stockId;
         private string name;
         private int price;
-        public struct _product
+        public class _product
         {
             public int id;
             public int quantity;
@@ -24,7 +24,7 @@ namespace ShopSystem
         public List<Product> Products { get { return products; } }
         public int ProductsQuantity { get { return products.Count; } }
 
-        public string addProduct(string name,int price, string description, bool isExclusive)
+        public string addProduct(string name,int price, string description, bool isExclusive) //agregas productos
         {
             int id = products.Count;
             bool productExists = false;
