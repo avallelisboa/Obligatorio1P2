@@ -83,11 +83,11 @@ namespace ShopSystem
 
         public void preLoad()
         {
-            addCommonClient("Jorge",45876212, "091425631", "jorgito@gmail.com","Bulevar Artigas 87546", "jorge", "jorge", true);        //Nombre, CI, celular, mail, dirección, usuario, contraseña, esDeMOnevideo?
+            addCommonClient("Jorge",45876212, "091425631", "jorgito@gmail.com","Bulevar Artigas 87546", "jorge", "jorge", true);        //Nombre, CI, celular, mail, dirección, usuario, contraseña, esDeMonevideo?
             addCommonClient("Javier",54789653, "091879564", "javier@gmail.com", "Bulevar Artigas 97463", "javier", "javier", true);
             addCommonClient("Juan",16549829, "091879564", "juan@gmail.com", "Bulevar Artigas 1087465", "juan", "juan", false);
 
-            addCompanyClient("company1", "company1 s.a.", 154684654, "company1@gmail.com", "25842143579", "Luis Alberto de Herrera 154843223", "company1", "company1", true, 3);
+            addCompanyClient("company1", "company1 s.a.", 154684654, "company1@gmail.com", "25842143579", "Luis Alberto de Herrera 154843223", "company1", "company1", true, 3); //nombre empresa, razón social, rut, mail, teléfono, address, usuario, contraseña, esDeMontevideo
             addCompanyClient("company2", "company2 s.a.", 878746845, "company2@gmail.com", "65487651321", "Luis Alberto de Herrera 648948455", "company2", "company2", true, 7);
             addCompanyClient("company3", "company3 s.a.", 346456148, "company3@gmail.com", "324564561551", "Luis Alberto de Herrera 878456456", "company3", "company3", false, 5);
 
