@@ -83,7 +83,7 @@ namespace ShopSystem
 
         public void preLoad()
         {
-            addCommonClient("Jorge",45876212, "091425631", "jorgito@gmail.com","Bulevar Artigas 87546", "jorge", "jorge", true);
+            addCommonClient("Jorge",45876212, "091425631", "jorgito@gmail.com","Bulevar Artigas 87546", "jorge", "jorge", true);        //Nombre, CI, celular, mail, dirección, usuario, contraseña, esDeMOnevideo?
             addCommonClient("Javier",54789653, "091879564", "javier@gmail.com", "Bulevar Artigas 97463", "javier", "javier", true);
             addCommonClient("Juan",16549829, "091879564", "juan@gmail.com", "Bulevar Artigas 1087465", "juan", "juan", false);
 
@@ -91,10 +91,10 @@ namespace ShopSystem
             addCompanyClient("company2", "company2 s.a.", 878746845, "company2@gmail.com", "65487651321", "Luis Alberto de Herrera 648948455", "company2", "company2", true, 7);
             addCompanyClient("company3", "company3 s.a.", 346456148, "company3@gmail.com", "324564561551", "Luis Alberto de Herrera 878456456", "company3", "company3", false, 5);
 
-            addProductStock("Frescos"); addProductStock("Congelados"); addProductStock("Hogar"); addProductStock("Téxtiles"); addProductStock("Tecnología"); //Categorías precargadas
+            addProductStock("Frescos"); addProductStock("Congelados"); addProductStock("Hogar"); addProductStock("Téxtiles"); addProductStock("Tecnología"); //Categorías precargadas(1 ProductStock para cada categoría)
 
             catalogue[0].addProduct("Escarola", 59, "Precio por Kg", false);            //Nombre, precio, descripción, esDeMontevideo
-            catalogue[0].Products[0].addProducts(100);
+            catalogue[0].Products[0].addProducts(100);                                  //Se  agregan los productos
             catalogue[0].addProduct("Espinaca", 24, "Precio por Kg", false);
             catalogue[0].Products[1].addProducts(100);
 
@@ -118,7 +118,7 @@ namespace ShopSystem
             catalogue[4].addProduct("Televisor Led", 15000, "Precio por unidad", false);
             catalogue[4].Products[1].addProducts(10);
 
-            login("jorge", "jorge");
+            login("jorge", "jorge");                            //Compras de los clientes
             var purchase1 = getPurchase();
             purchase1.addToPurchase(0, 0, 10);
             purchase1.buy();

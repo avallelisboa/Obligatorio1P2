@@ -24,7 +24,7 @@ namespace ConsoleApp
                     Console.WriteLine("------------------------------------------------------------------------------------------------");
                     Console.WriteLine("1 - Iniciar Sesión");
                     Console.WriteLine("2 - Registrarse");
-                    Console.WriteLine("3 - Sistema"); //Alta de productos en el catálogo va acá.
+                    Console.WriteLine("3 - Sistema"); //Acceso a lista de compras y lista de clientes
                     Console.WriteLine("0 - Salir");
                     Console.WriteLine("-------------------------------------------------------------------------------------------------");
                     ConsoleKey key = Console.ReadKey(true).Key;
@@ -242,9 +242,14 @@ namespace ConsoleApp
         }
         private static void AddProducts()
         {
-            Console.Clear();
-            Console.WriteLine("Ingrese el nombre de su producto");
-            string productName = Console.ReadLine();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch(Exception err)
+            {
+                errorHandling(err);
+            }
         }
 
         private static void DisplayRegisteredClients()
