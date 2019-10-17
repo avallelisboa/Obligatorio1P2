@@ -20,7 +20,7 @@ namespace ShopSystem
         public int Price{get{return price;}}
         public string Description { get { return description; } }
         public int Quantity { get {return quantity;} }
-        private bool IsExclusive{get{return isExclusive;}}
+        public bool IsExclusive{get{return isExclusive;}}
 
         private Product(string name, int id, int stockId, int price, string description, bool isExclusive)
         {

@@ -11,6 +11,8 @@ namespace ShopSystem
         private List<_product> productsToBuy = new List<_product>();
         private int totalPrice = 0;
         private DateTime date;
+        private bool toDeliver;
+        private bool paysByCash;
         private Purchase(Client client, List<ProductStock>productStocks)
         {
             this.client = client;
@@ -24,9 +26,10 @@ namespace ShopSystem
             public int quantity;
         }
 
+        public bool ToDeliver { get { return toDeliver; } }
+        public bool PaysByCash { get { return paysByCash; } }
         public DateTime Date { get { return date; } }
-
-
+        
         private int calculatePurchasePrice()
         {
             return totalPrice;
@@ -60,7 +63,11 @@ namespace ShopSystem
                 p.stockId = stockId;
                 p.quantity = _product.quantity;
                 productsToBuy.Add(p);
-                totalPrice += (_product.price) * (_product.quantity);
+                if (productStocks[stockId].Products[productId].IsExclusive && _product.quantity > 1)
+                {
+                    if(_product.quantity > 1) totalPrice += (_product.price) * (_product.quantity - 1);
+                }
+                else totalPrice += (_product.price) * (_product.quantity);
                 return "The products were added correctly";
             }
             else return "The product could not be added";
