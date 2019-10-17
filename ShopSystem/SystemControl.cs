@@ -185,5 +185,15 @@ namespace ShopSystem
             }
             else return "The product stock was already created";
         }
+
+        public List<Client> getClientsByDate(DateTime date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Purchase> getPurchasesBetweenDates(DateTime d1, DateTime d2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
