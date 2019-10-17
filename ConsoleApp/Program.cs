@@ -46,7 +46,7 @@ namespace ConsoleApp
                             system();
                             break;
                         case ConsoleKey.NumPad0:
-                        case ConsoleKey.D4:
+                        case ConsoleKey.D0:
                             outLoop();
                             exit = true;
                             break;
@@ -205,7 +205,7 @@ namespace ConsoleApp
             {
                 Console.Clear();
                 Console.WriteLine("1 - Agregar productos");
-                Console.WriteLine("2 - Ver Clientes registrados");
+                Console.WriteLine("2 - Ver clientes registrados");
 
                 bool _optionNotCorrect = true;
                 while (_optionNotCorrect)
@@ -242,7 +242,20 @@ namespace ConsoleApp
 
         private static void DisplayRegisteredClients()
         {
-
+            bool wasDateEnteredCorrect = false;
+            while (!wasDateEnteredCorrect)
+            {
+                Console.WriteLine("Ingrese la fecha de límite de registro");
+                string dateToParse = Console.ReadLine();
+                DateTime date;
+                if (DateTime.TryParse(dateToParse, out date))
+                {
+                    wasDateEnteredCorrect = true;
+                    var clients = _system.getClientsByDate(date);
+                }
+                else Console.WriteLine("Ingrese una fecha válida");
+            }
+            
         }
 
         private static void clientMenu()
@@ -439,7 +452,8 @@ namespace ConsoleApp
 
         private static void settings() //Usar este método para agregar productos y listar clientes en las fechas
         {
-            
+            Console.Clear();
+            Console.WriteLine("1 - ");
         }
         
         private static void errorHandling(Exception err)

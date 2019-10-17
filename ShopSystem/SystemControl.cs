@@ -188,12 +188,25 @@ namespace ShopSystem
 
         public List<Client> getClientsByDate(DateTime date)
         {
-            throw new NotImplementedException();
+            List<Client> _clients = new List<Client>();
+            foreach(Client c in clients)
+            {
+                int result = DateTime.Compare(c.RegisterDate, date);
+                if (result < 0) _clients.Add(c);
+            }
+            return _clients;
         }
 
         public List<Purchase> getPurchasesBetweenDates(DateTime d1, DateTime d2)
         {
-            throw new NotImplementedException();
+            List<Purchase> _purchases = new List<Purchase>();
+            foreach(Purchase p in purchases)
+            {
+                int result1 = DateTime.Compare(p.Date, d1);
+                int result2 = DateTime.Compare(p.Date, d2);
+                if (result1 > 0 && result2 < 0) _purchases.Add(p);
+            }
+            return _purchases;
         }
     }
 }
