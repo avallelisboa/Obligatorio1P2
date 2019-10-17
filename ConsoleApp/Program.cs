@@ -7,7 +7,7 @@ namespace ConsoleApp
     class Program
     {
         private static bool exit = false;
-        private static SystemControl _system;
+        private static SystemControl _system; //Variable que contiene la dirección de memoria de la instancia de la clase adeministradora
         static void Main(string[] args)
         {
             _system = SystemControl.getSystemControl(); //Variable de acceso a clase administradora(contiene la instancia de la clase administradora)
@@ -201,14 +201,15 @@ namespace ConsoleApp
             bool optionIsNotCorrect = true;
             while (optionIsNotCorrect)
             {
-                Console.Clear();
-                Console.WriteLine("1 - Agregar productos");
-                Console.WriteLine("2 - Ver clientes registrados");
-                Console.WriteLine("0 - Salir");
-
                 bool _optionNotCorrect = true;
                 while (_optionNotCorrect)
                 {
+                    Console.Clear();
+                    Console.WriteLine("1 - Agregar productos");
+                    Console.WriteLine("2 - Ver clientes registrados");
+                    Console.WriteLine("3 - Compras realizadas");
+                    Console.WriteLine("0 - Salir");
+
                     ConsoleKey _key = Console.ReadKey(true).Key; //Obtiene la tecla presionada por el usuario y la almacena dentro de la variable _key
                     switch (_key)
                     {
@@ -223,6 +224,10 @@ namespace ConsoleApp
                             Console.Clear();
                             _optionNotCorrect = false;
                             DisplayRegisteredClients();
+                            break;
+                        case ConsoleKey.NumPad3:
+                        case ConsoleKey.D3:
+                            printPurchasesList();
                             break;
                         case ConsoleKey.NumPad0:
                         case ConsoleKey.D0:
@@ -515,16 +520,56 @@ namespace ConsoleApp
                         isLogged = false;
                         break;
                 }
-            }
-            
+            }            
         }
 
-
-        private static void settings() //Usar este método para agregar productos y listar clientes en las fechas
+        private static void printPurchasesList()
         {
-            Console.Clear();
-            Console.WriteLine("1 - ");
+            bool datesWereCorrect = false;
+            while (!datesWereCorrect)
+            {
+                Console.Clear();
+                Console.WriteLine("Ingrese la fecha inicial");
+                string d1ToParse = Console.ReadLine();
+                DateTime d1;
+                Console.WriteLine("Ingrese la fecha final");
+                string d2ToParse = Console.ReadLine();
+                DateTime d2;
+                Console.Clear();
+                if (DateTime.TryParse(d1ToParse, out d1) && DateTime.TryParse(d2ToParse, out d2))
+                {
+                    var purchases = _system.getPurchasesBetweenDates(d1, d2);
+                    Console.WriteLine("|  Nombre de cliente           |          fecha de compra                 |             cantidad total de productos  |");
+                    if (purchases.Count == 0) Console.WriteLine("No hay compras entre las fechas indicadas");
+                    else
+                    {
+                        foreach (Purchase p in purchases)
+                        {
+                            if (p.Client.GetType() == typeof(Common))
+                            {
+                                Console.WriteLine("|  " + ((Common)p.Client).Name + "           |            " + p.Date + "                 |                  " + p.ProductsQuantity + "  |");
+                            }
+                            if (p.Client.GetType() == typeof(Company))
+                            {
+                                Console.WriteLine("|  " + ((Company)p.Client).CompanyName + "           |            " + p.Date + "                 |                  " + p.ProductsQuantity + "  |");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Ingrese fechas correctas");
+                }
+                Console.WriteLine("presione \"v\" para volver al menú o presione cualquier tecla para volver a ingresar una fecha");
+                ConsoleKey _k = Console.ReadKey(true).Key;
+                if (_k == ConsoleKey.V) datesWereCorrect = true;
+            }            
         }
+
+        private static void settings() //User settings
+        {
+            throw new NotImplementedException();
+        }        
         
         private static void errorHandling(Exception err)
         {

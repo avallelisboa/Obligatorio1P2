@@ -26,9 +26,11 @@ namespace ShopSystem
             public int quantity;
         }
 
+        public Client Client { get { return client; } }
         public bool ToDeliver { get { return toDeliver; } set { toDeliver = value; } }
         public bool PaysByCash { get { return paysByCash; } set { paysByCash = value; } }
         public DateTime Date { get { return date; } }
+        public int ProductsQuantity { get { return productsToBuy.Count; } }
         
         private int calculatePurchasePrice()
         {
