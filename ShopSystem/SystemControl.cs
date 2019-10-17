@@ -115,7 +115,7 @@ namespace ShopSystem
 
             catalogue[4].addProduct("PC Gamer", 12500, "Precio por unidad", false);
             catalogue[4].Products[0].addProducts(100);
-            catalogue[4].addProduct("Televisor Led", 15000, "Precio por unidad", );false
+            catalogue[4].addProduct("Televisor Led", 15000, "Precio por unidad", false);
             catalogue[4].Products[1].addProducts(10);
 
             login("jorge", "jorge");

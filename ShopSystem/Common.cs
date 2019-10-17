@@ -15,6 +15,7 @@ namespace ShopSystem
             this.address = address;
         }
 
+        public string Name { get { return name; } }
         public int IdentificationCard { get { return identificationCard; } }
 
         public class commonValidation

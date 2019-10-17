@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShopSystem
 {
-    class Company:Client
+    public class Company:Client
     {
         private string companyName;
         private string bussinesName;

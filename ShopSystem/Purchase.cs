@@ -26,8 +26,8 @@ namespace ShopSystem
             public int quantity;
         }
 
-        public bool ToDeliver { get { return toDeliver; } }
-        public bool PaysByCash { get { return paysByCash; } }
+        public bool ToDeliver { get { return toDeliver; } set { toDeliver = value; } }
+        public bool PaysByCash { get { return paysByCash; } set { paysByCash = value; } }
         public DateTime Date { get { return date; } }
         
         private int calculatePurchasePrice()
@@ -56,7 +56,7 @@ namespace ShopSystem
             if (client.GetType() == typeof(Common) && !(client.IsFromMontevideo)) discount += 5;
             if (client.GetType() == typeof(Company) && ((client.RegisterDate - DateTime.Today).TotalDays / 365) > 5) discount += ((Company)client).Discount * 2;
             else if (client.GetType() == typeof(Company)) discount += ((Company)client).Discount;
-            totalPrice = discount * totalPrice / 100;
+            totalPrice = (100 - discount) * totalPrice / 100;
             if (!(client.IsFromMontevideo) && toDeliver) totalPrice += 1000;
             return "You must pay $" + totalPrice;
         }

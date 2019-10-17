@@ -15,47 +15,43 @@ namespace ConsoleApp
             _system.preLoad(); //Ejecuta la precarga
 
             while (!exit)
-            {
-                Console.Clear();
-                Console.WriteLine("Presione el número de opción en su teclado númerico para realizar la operación correspondiente");
-                Console.WriteLine("------------------------------------------------------------------------------------------------");
-                Console.WriteLine("1 - Iniciar Sesión");
-                Console.WriteLine("2 - Registrarse");
-                Console.WriteLine("3 - Sistema"); //Alta de productos en el catálogo va acá.
-                Console.WriteLine("0 - Salir");
-                Console.WriteLine("-------------------------------------------------------------------------------------------------");
+            {                
                 bool optionNotCorrect = true;
                 while (optionNotCorrect)
                 {
+                    Console.Clear();
+                    Console.WriteLine("Presione el número de opción en su teclado númerico para realizar la operación correspondiente");
+                    Console.WriteLine("------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("1 - Iniciar Sesión");
+                    Console.WriteLine("2 - Registrarse");
+                    Console.WriteLine("3 - Sistema"); //Alta de productos en el catálogo va acá.
+                    Console.WriteLine("0 - Salir");
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------");
                     ConsoleKey key = Console.ReadKey(true).Key;
                     switch (key)
                     {
                         case ConsoleKey.NumPad1:
                         case ConsoleKey.D1:
-                            outLoop();
+                            Console.Clear();
                             signIn();
                             break;
                         case ConsoleKey.NumPad2:
                         case ConsoleKey.D2:
-                            outLoop();
+                            Console.Clear();
                             register();
                             break;
                         case ConsoleKey.NumPad3:
                         case ConsoleKey.D3:
-                            outLoop();
+                            Console.Clear();
                             system();
                             break;
                         case ConsoleKey.NumPad0:
                         case ConsoleKey.D0:
-                            outLoop();
+                            Console.Clear();
+                            optionNotCorrect = false;
                             exit = true;
                             break;
                     }
-                }
-                void outLoop()
-                {
-                    Console.Clear();
-                    optionNotCorrect = false;
                 }
             }
         }
@@ -177,7 +173,7 @@ namespace ConsoleApp
                     Console.Clear();
                     if (wasLoginSuccessful)
                     {
-                        Console.WriteLine("Los datos son correctos, la sesión ha sido iniciada \n Presione una tecla para continuar");
+                        Console.WriteLine("Los datos son correctos, la sesión ha sido iniciada \n \n Presione una tecla para continuar");
                         Console.ReadKey();
                         Console.Clear();
                         clientMenu();
@@ -208,6 +204,7 @@ namespace ConsoleApp
                 Console.Clear();
                 Console.WriteLine("1 - Agregar productos");
                 Console.WriteLine("2 - Ver clientes registrados");
+                Console.WriteLine("0 - Salir");
 
                 bool _optionNotCorrect = true;
                 while (_optionNotCorrect)
@@ -217,19 +214,22 @@ namespace ConsoleApp
                     {
                         case ConsoleKey.NumPad1:
                         case ConsoleKey.D1:
-                            outLoop();
+                            Console.Clear();
+                            _optionNotCorrect = false;
                             AddProducts();
                             break;
                         case ConsoleKey.NumPad2:
                         case ConsoleKey.D2:
-                            outLoop();
+                            Console.Clear();
+                            _optionNotCorrect = false;
                             DisplayRegisteredClients();
                             break;
-                    }
-                    void outLoop()
-                    {
-                        Console.Clear();
-                        _optionNotCorrect = false;
+                        case ConsoleKey.NumPad0:
+                        case ConsoleKey.D0:
+                            Console.Clear();
+                            _optionNotCorrect = false;
+                            optionIsNotCorrect = false;
+                            break;
                     }
                 }
 
@@ -252,12 +252,33 @@ namespace ConsoleApp
                 DateTime date;
                 if (DateTime.TryParse(dateToParse, out date))
                 {
+                    Console.Clear();
+                    Console.WriteLine("-------------------------------------------------------------------------------");
+                    Console.WriteLine("|Nombre        |            Mail             |                 Tipo de cliente|");
+                    Console.WriteLine("-------------------------------------------------------------------------------");
                     wasDateEnteredCorrect = true;
                     var clients = _system.getClientsByDate(date);
+                    if (clients.Count > 0)
+                    {
+                        foreach (Client c in clients)
+                        {
+                            Console.WriteLine("-------------------------------------------------------------------------------");
+                            if (c.GetType() == typeof(Common))
+                            {
+                                Console.WriteLine("|" + ((Common)c).Name + "         |          " + c.Mail + "           |           Common      |");
+                            }
+                            if (c.GetType() == typeof(Company))
+                            {
+                                Console.WriteLine("|" + ((Company)c).CompanyName + "        |           " + c.Mail + "          |           Company    |");
+                            }
+                            Console.WriteLine("-------------------------------------------------------------------------------");
+                        }
+                    }
+                    else Console.WriteLine("No hay clientes registrados antes de la fecha");
                 }
                 else Console.WriteLine("Ingrese una fecha válida");
             }
-            
+            Console.ReadKey();            
         }
 
         private static void clientMenu()
@@ -419,6 +440,53 @@ namespace ConsoleApp
                                         ConsoleKey _k = Console.ReadKey(true).Key;
                                         if (_k == ConsoleKey.C)
                                         {
+                                            bool _optionCorrect = false; bool paysByCash = false; bool toDeliver = false;
+                                            while (!_optionCorrect)
+                                            {
+                                                Console.Clear();
+                                                Console.WriteLine("Elija su forma de pago");
+                                                Console.WriteLine("1 - Efectivo");
+                                                Console.WriteLine("2 - Tarjeta");
+                                                ConsoleKey __k = Console.ReadKey(true).Key;
+                                                switch (__k)
+                                                {
+                                                    case ConsoleKey.NumPad1:
+                                                    case ConsoleKey.D1:
+                                                        paysByCash = true;
+                                                        _optionCorrect = true;
+                                                        break;
+                                                    case ConsoleKey.NumPad2:
+                                                    case ConsoleKey.D2:
+                                                        paysByCash = false;
+                                                        _optionCorrect = true;
+                                                        break;
+                                                }
+                                            }
+                                            _optionCorrect = false;
+                                            while (!_optionCorrect)
+                                            {
+                                                Console.Clear();
+                                                Console.WriteLine("Especifique si pasará a retirar el producto o quiere que se lo envíen");
+                                                Console.WriteLine("1 - Retiro");
+                                                Console.WriteLine("2 - Envío");
+                                                ConsoleKey key = Console.ReadKey(true).Key;
+                                                switch (key)
+                                                {
+                                                    case ConsoleKey.NumPad1:
+                                                    case ConsoleKey.D1:
+                                                        toDeliver = false;
+                                                        _optionCorrect = true;
+                                                        break;
+                                                    case ConsoleKey.NumPad2:
+                                                    case ConsoleKey.D2:
+                                                        toDeliver = true;
+                                                        _optionCorrect = true;
+                                                        break;
+                                                }
+                                            }
+
+                                            purchase.PaysByCash = paysByCash;
+                                            purchase.ToDeliver = toDeliver;
                                             message = purchase.buy();
                                             Console.WriteLine(message);
                                             Console.WriteLine("Presione una tecla para continuar");
