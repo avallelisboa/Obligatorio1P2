@@ -124,11 +124,13 @@ namespace ConsoleApp
                         Console.WriteLine("Ingrese su Departamento");
                         string departamento = Console.ReadLine();
                         bool isFromMontevideo = false;
+                        Console.WriteLine("Ingrese el descuento de su empresa");
+                        int discount = Convert.ToInt32(Console.ReadLine());
                         if (departamento == "Montevideo" || departamento == "montevideo" || departamento == "MONTEVIDEO")
                         {
                             isFromMontevideo = true;
                         }
-                        var result = _system.addCompanyClient(companyName, bussinesName, rut, address, mail, phone, user, password, isFromMontevideo);
+                        var result = _system.addCompanyClient(companyName, bussinesName, rut, address, mail, phone, user, password, isFromMontevideo, discount);
                         registerSuccessful = result.wasRegisterSuccessful;
                         string message = result.message;
                         Console.Clear();

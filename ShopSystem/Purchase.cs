@@ -43,6 +43,7 @@ namespace ShopSystem
         public string buy()
         {
             int productsToBuyNumber = productsToBuy.Count;
+            int discount = 0;
             for(int i =0 ; i< productsToBuyNumber; i++)
             {
                 int productId = productsToBuy[i].productId;
@@ -50,7 +51,14 @@ namespace ShopSystem
                 int quantity = productsToBuy[i].quantity;
                 productStocks[stockId].removeProduct(productId,quantity);
             }
-            return "Debe pagar $" + totalPrice;
+            if (paysByCash && totalPrice > 5000) discount += 4;
+            if (((client.RegisterDate - DateTime.Today).TotalDays / 365) > 2) discount += 5;
+            if (client.GetType() == typeof(Common) && !(client.IsFromMontevideo)) discount += 5;
+            if (client.GetType() == typeof(Company) && ((client.RegisterDate - DateTime.Today).TotalDays / 365) > 5) discount += ((Company)client).Discount * 2;
+            else if (client.GetType() == typeof(Company)) discount += ((Company)client).Discount;
+            totalPrice = discount * totalPrice / 100;
+            if (!(client.IsFromMontevideo) && toDeliver) totalPrice += 1000;
+            return "You must pay $" + totalPrice;
         }
 
         public string addToPurchase(int stockId, int productId, int quantity)

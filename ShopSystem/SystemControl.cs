@@ -53,7 +53,7 @@ namespace ShopSystem
             else return new registerStatus(false, "The client was not registered");
         }
 
-        public registerStatus addCompanyClient(string companyName, string bussinesName, int rut, string mail, string phone, string address, string user, string password, bool isFromMontevideo)
+        public registerStatus addCompanyClient(string companyName, string bussinesName, int rut, string mail, string phone, string address, string user, string password, bool isFromMontevideo, int discount)
         {
             int id = clients.Count;
             var isClientInformationCorrect = Client.isInformationCorrect(clients, user, mail);
@@ -74,7 +74,7 @@ namespace ShopSystem
             bool isRutUsed = isCompanyClientInformationCorrect.isRutUsed;
             if (!isMailUsed && !isUserUsed && !isCompanyNameUsed && !isBussinesNameUsed && !isRutUsed)
             {
-                Client _client = Company.AddCompanyClient(id, companyName, bussinesName, rut, address, mail, phone, user, password, isFromMontevideo);
+                Client _client = Company.AddCompanyClient(id, companyName, bussinesName, rut, address, mail, phone, user, password, isFromMontevideo, discount);
                 clients.Add(_client);
                 return new registerStatus(true,"The user was registered successfully");
             }
@@ -87,9 +87,9 @@ namespace ShopSystem
             addCommonClient("Javier",54789653, "091879564", "javier@gmail.com", "Bulevar Artigas 97463", "javier", "javier", true);
             addCommonClient("Juan",16549829, "091879564", "juan@gmail.com", "Bulevar Artigas 1087465", "juan", "juan", false);
 
-            addCompanyClient("company1", "company1 s.a.", 154684654, "company1@gmail.com", "25842143579", "Luis Alberto de Herrera 154843223", "company1", "company1", true);
-            addCompanyClient("company2", "company2 s.a.", 878746845, "company2@gmail.com", "65487651321", "Luis Alberto de Herrera 648948455", "company2", "company2", true);
-            addCompanyClient("company3", "company3 s.a.", 346456148, "company3@gmail.com", "324564561551", "Luis Alberto de Herrera 878456456", "company3", "company3", false);
+            addCompanyClient("company1", "company1 s.a.", 154684654, "company1@gmail.com", "25842143579", "Luis Alberto de Herrera 154843223", "company1", "company1", true, 3);
+            addCompanyClient("company2", "company2 s.a.", 878746845, "company2@gmail.com", "65487651321", "Luis Alberto de Herrera 648948455", "company2", "company2", true, 7);
+            addCompanyClient("company3", "company3 s.a.", 346456148, "company3@gmail.com", "324564561551", "Luis Alberto de Herrera 878456456", "company3", "company3", false, 5);
 
             addProductStock("Frescos"); addProductStock("Congelados"); addProductStock("Hogar"); addProductStock("Téxtiles"); addProductStock("Tecnología"); //Categorías precargadas
 

@@ -9,6 +9,12 @@ namespace ShopSystem
         private string companyName;
         private string bussinesName;
         private int rut;
+        private int discount;
+
+        public string CompanyName { get { return companyName; } }
+        public string BussinesName { get { return bussinesName; } }
+        public int Rut { get { return rut; } }
+        public int Discount { get { return discount; } }
 
         public class companyValidation
         {
@@ -55,16 +61,16 @@ namespace ShopSystem
             return companyValidation;
         }
 
-        private Company(int id,string companyName, string bussinesName, int rut, string address, string mail, string phone, string user, string password, bool isFromMontevideo) : base(id,address,mail, phone,user,password,isFromMontevideo)
+        private Company(int id,string companyName, string bussinesName, int rut, string address, string mail, string phone, string user, string password, bool isFromMontevideo, int discount) : base(id,address,mail, phone,user,password,isFromMontevideo)
         {
             this.companyName = companyName;
             this.bussinesName = bussinesName;
             this.rut = rut;
         }
 
-        public static Company AddCompanyClient(int id, string companyName, string bussinesName, int rut, string address, string mail, string phone, string user, string password, bool isFromMontevideo)
+        public static Company AddCompanyClient(int id, string companyName, string bussinesName, int rut, string address, string mail, string phone, string user, string password, bool isFromMontevideo, int discount)
         {
-            return new Company(id,companyName,bussinesName, rut, address, mail, phone, user, password, isFromMontevideo);
+            return new Company(id,companyName,bussinesName, rut, address, mail, phone, user, password, isFromMontevideo, discount);
         }
     }
 }
