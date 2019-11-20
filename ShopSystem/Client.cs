@@ -67,6 +67,10 @@ namespace ShopSystem
             clientValidation clientValidation = new clientValidation(isMailUsed, isUserUsed);
             return clientValidation;
         }
+        public virtual string getName()
+        {
+            return "";
+        }
         public override string ToString()
         {
             return base.ToString();

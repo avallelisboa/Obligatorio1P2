@@ -273,14 +273,7 @@ namespace ConsoleApp
                         foreach (Client c in clients)
                         {
                             Console.WriteLine("-------------------------------------------------------------------------------");
-                            if (c.GetType() == typeof(Common))
-                            {
-                                Console.WriteLine("|" + ((Common)c).Name + "         |          " + c.Mail + "           |           Common      |");
-                            }
-                            if (c.GetType() == typeof(Company))
-                            {
-                                Console.WriteLine("|" + ((Company)c).CompanyName + "        |           " + c.Mail + "          |           Company    |");
-                            }
+                            Console.WriteLine("|" + c.getName() + "         |          " + c.Mail + "           |          " + c.ToString() + "         |");
                             Console.WriteLine("-------------------------------------------------------------------------------");
                         }
                     }

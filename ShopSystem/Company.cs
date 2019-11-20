@@ -72,5 +72,15 @@ namespace ShopSystem
         {
             return new Company(id,companyName,bussinesName, rut, address, mail, phone, user, password, isFromMontevideo, discount);
         }
+
+        public override string getName()
+        {
+            return companyName;
+        }
+
+        public override string ToString()
+        {
+            return "Company";
+        }
     }
 }

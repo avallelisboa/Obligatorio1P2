@@ -52,5 +52,15 @@ namespace ShopSystem
         {
             return new Common(id, name,identificationCard, phone, address, mail, user, password, isFromMontevideo);
         }
+
+        public override string getName()
+        {
+            return name;
+        }
+
+        public override string ToString()
+        {
+            return "Common";
+        }
     }
 }
