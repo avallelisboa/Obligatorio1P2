@@ -24,7 +24,7 @@ namespace ShopSystem
         public List<Product> Products { get { return products; } }
         public int ProductsQuantity { get { return products.Count; } }
 
-        public string addProduct(string name,int price, string description, bool isExclusive) //agregas productos
+        public string addProduct(string name,int price, string description, bool isExclusive, int quantity) //agregas productos
         {
             int id = products.Count;
             bool productExists = false;
@@ -41,6 +41,7 @@ namespace ShopSystem
                     if (!productExists)
                     {
                         products.Add(Product.createProduct(name, id, stockId, price, description, isExclusive));
+                        products[products.Count - 1].addProducts(quantity);
                         return "The product was added correctly";
                     }
                     else return "The product already exists";

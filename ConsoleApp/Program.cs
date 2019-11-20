@@ -244,7 +244,62 @@ namespace ConsoleApp
         {
             try
             {
-                throw new NotImplementedException();
+                bool idCorrect = false;
+                while (!idCorrect)
+                {
+                    Console.WriteLine("Presione \"v\" para volver u otra teclar para agregar productos");
+                    ConsoleKey _l = Console.ReadKey().Key;
+                    if (_l == ConsoleKey.V) break;
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Seleccione la góndola en la que desea agregar productos");
+                        List<ProductStock> categories = _system.getCatalogue();
+                        int l = categories.Count;
+                        for (int i = 0; i < l; i++)
+                        {
+                            Console.WriteLine(i + " - " + categories[i].Name);
+                        }
+                        int _k; int.TryParse(Console.ReadLine(), out _k);
+                        Console.Clear();
+                        if (_k < l)
+                        {
+                            bool parseWasCorrect = false;
+                            while (!parseWasCorrect)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Ingrese el nombre del producto a agregar");
+                                string _name = Console.ReadLine();
+                                Console.WriteLine("Ingrese el precio del producto a agregar");
+                                int _price; bool wasPriceParseCorrect = int.TryParse(Console.ReadLine(), out _price);
+                                Console.WriteLine("Ingrese la descripción del producto a agregar");
+                                string _description = Console.ReadLine();
+                                Console.WriteLine("Ingrese si es exclusivo");
+                                bool _isExclusive; bool wasExclusiveParseCorrect = bool.TryParse(Console.ReadLine(), out _isExclusive);
+                                Console.WriteLine("Ingrese la cantidad de productos a agregar");
+                                int quantity; bool wasQuantityParseCorrect = int.TryParse(Console.ReadLine(), out quantity); 
+                                if (wasPriceParseCorrect && wasExclusiveParseCorrect && wasQuantityParseCorrect)
+                                {
+                                    string result = categories[_k].addProduct(_name, _price, _description, _isExclusive, quantity);
+                                    Console.Clear();
+                                    Console.WriteLine(result);
+                                    parseWasCorrect = true;
+                                    idCorrect = true;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Los datos no son correctos.... Presione una tecla para continuar");
+                                    Console.ReadKey();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Id de catálogo incorrecto, presione un tecla y vuelva a seleccionar el catálogo");
+                            Console.ReadKey();
+                        }
+                    }
+                }               
             }
             catch(Exception err)
             {
